@@ -1,2 +1,13 @@
-# Portafolio2k22
-Proyecto portafolio DUOC UC 2022
+# Proyecto portafolio DUOC UC 2022
+
+## Inicializar
+
+Para poder comenzar a ejecutar el proyecto Necesita tener instalado python y el framework Django y una base de datos Oracle XE.
+
+Ejecutar los scripts SQL y DDL de creación de usuario y tablas.
+
+Mediante la terminal vaya a la carpeta del proyecto y escriba el siguiente comando:
+
+> python manage.py migrate
+
+Esto hará que Django se conecte a Oracle y cree las tablas para ejecutar el proyecto.
