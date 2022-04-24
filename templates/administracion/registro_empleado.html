@@ -1,0 +1,111 @@
+{% extends 'administracion\adminHome.html' %}
+
+{% block content %}
+<h3>Registro nuevo empleado</h3>
+<div class="row">
+  <div class="card-body col-sm-2">
+  
+    <div class="card mx-auto" style="max-width:220px; margin-top:40px; margin-left: 30px;">
+      <h4>Agregar tipo de empleado</h5>
+      <form action="{% url 'tipo_empleado'%}" method="post">
+        {% csrf_token %}
+        
+        <div class="form-row">
+          <div class="col form-group">
+            <label>Tipo de empleado</label>
+            {{form.seccion}}
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block"> Registrar  </button>
+        </div> <!-- form-group// -->
+  
+      </form>
+    </div>
+   
+  </div>
+  <div class="card-body col-sm-6">
+    <div class="card mx-auto " style="max-width:520px; margin-top:40px; ">
+      <article class="card-body">
+        <header class="mb-4">
+          <h4 class="card-title">Registro de Empleado</h4>
+          <h6>Todos los campos marcados con un asterisco son de carácter obligatorio</h6>
+        </header>
+        <form action="{% url 'registro_empleado'%}" method="POST" class="was-validated">
+          {% csrf_token %}
+    
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Run <span style="color:#ff0000">*</span></label>
+              {{form_emp.rut_emp}}
+            </div>
+            <div class="form-group col-md-6">
+              <label>Nombre <span style="color:#ff0000">*</span></label>
+              {{form_emp.nombre}}
+            </div>
+            <div class="form-group col-md-6">
+              <label>Apellido <span style="color:#ff0000">*</span></label>
+              {{form_emp.apellidos}}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Telefono <span style="color:#ff0000">*</span></label>
+              {{form_emp.telefono}}
+            </div>
+            <div class="form-group col-md-6">
+              <label>Email <span style="color:#ff0000">*</span></label>
+              {{form_emp.usermail}}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Crear contraseña <span style="color:#ff0000">*</span></label>
+              {{ form_emp.password }}
+            </div> <!-- form-group end.// -->
+            <div class="form-group col-md-6">
+              <label>Repetir contraseña <span style="color:#ff0000">*</span></label>
+              {{ form_emp.confirm_password }}
+            </div> <!-- form-group end.// -->
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="exampleInputFile">Rol usuario <span style="color:#ff0000">*</span></label> <select
+                class="form-control" name="rol" id="rol" required="">
+                <option value="">Seleccione el rol del usuario</option>
+                {% for i in rol %}
+                <option value="{{i.0}}">{{i.1}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="exampleInputFile">Tipo de empleado <span style="color:#ff0000">*</span></label> <select
+                class="form-control" name="tipo_empleado" id="tipo_empleado" required="">
+                <option value="">Seleccione el cargo</option>
+                {% for i in tip_emp %}
+                <option value="{{i.0}}">{{i.1}}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <button type="submit" class="btn btn-primary btn-block"> Registrar empleado </button>
+            </div> <!-- form-group// -->
+          </div>
+         
+          
+          {{ form_emp.email.errors }}
+          {{ form_emp.non_field_errors }}
+        </form>
+      </article>
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock %}

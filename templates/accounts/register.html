@@ -1,0 +1,84 @@
+{%extends 'base.html'%}
+{%block content%}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+
+    <!-- ============================ COMPONENT REGISTER   ================================= -->
+        <div class="card mx-auto" style="max-width:620px; margin-top:40px;">
+          <article class="card-body">
+            {% include 'includes/alerts.html'%}
+            <header class="mb-4"><h4 class="card-title">Registro de Usuario</h4></header>
+            <!--Form usuario normal-->
+           
+                <form action="{% url 'register'%}" method="POST" class="was-validated">
+                    {%csrf_token%}
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label>Nombre</label>
+                                {{ form.nombre }}
+                            </div> <!-- form-group end.// -->
+                            <div class="col form-group">
+                                <label>Apellido</label>
+                                {{ form.apellido }}
+                            </div> <!-- form-group end.// -->
+                            <div class="col form-group">
+                                <label>Run</label>
+                                {{ form.rut_cli }}
+                            </div> <!-- form-group end.// -->
+                        </div> <!-- form-row end.// -->
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label>Numero telefono</label>
+                                {{ form.contacto}}
+                            </div> <!-- form-group end.// -->
+                            <div class="col form-group">
+                                <label>Email</label>
+                                {{ form.usermail }}
+                            </div> <!-- form-group end.// -->
+                        </div> <!-- form-row end.// -->
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label>Rut empresa</label>
+                                {{ form.rut_empresa}}
+                            </div> <!-- form-group end.// -->
+                            <div class="col form-group">
+                                <label>Giro</label>
+                                {{ form.giro }}
+                            </div> <!-- form-group end.// -->
+                            <div class="col form-group">
+                                <label>Razon</label>
+                                {{ form.razon_social }}
+                            </div> <!-- form-group end.// -->
+                        </div> <!-- form-row end.// -->
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Crear contraseña</label>
+                                {{ form.password }}
+                            </div> <!-- form-group end.// -->
+                            <div class="form-group col-md-6">
+                                <label>Repetir contraseña</label>
+                                {{ form.confirm_password }}
+                            </div> <!-- form-group end.// -->
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block"> Registrar  </button>
+                        </div> <!-- form-group// -->
+                        <div class="valid-feedback">Correcto.</div>
+                        <div class="invalid-feedback">Porfavor ingrese los datos solicitados.</div>
+                        {{ form.email.errors }}
+                        {{ form.non_field_errors }}
+
+                </form>
+           
+            </article><!-- card-body.// -->
+        </div> <!-- card .// -->
+        <p class="text-center mt-4">Tienes una cuenta? <a href="#">Log In</a></p>
+        <br><br>
+    <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+
+
+</section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+{%endblock%}
