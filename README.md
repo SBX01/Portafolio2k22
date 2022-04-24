@@ -11,3 +11,9 @@ Mediante la terminal vaya a la carpeta del proyecto y escriba el siguiente coman
 > python manage.py migrate
 
 Esto hará que Django se conecte a Oracle y cree las tablas para ejecutar el proyecto.
+
+Una vez terminado todos estos procesos ejecute:
+
+> python manage.py runserver
+
+y django correrá el servicio. :D
