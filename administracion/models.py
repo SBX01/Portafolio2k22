@@ -186,6 +186,9 @@ class Empleado(models.Model):
     class Meta:
         managed = False
         db_table = 'empleado'
+    
+    def __str__(self):
+        return str(self.nombre)
 
 
 class GrupoProducto(models.Model):
