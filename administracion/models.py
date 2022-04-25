@@ -311,6 +311,9 @@ class TipoEmpleado(models.Model):
         managed = False
         db_table = 'tipo_empleado'
 
+    def __str__(self):
+        return str(self.seccion)
+
 
 class TipoProducto(models.Model):
     id = models.IntegerField(primary_key=True)

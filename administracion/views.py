@@ -1,9 +1,10 @@
+from cmath import e
 import imp
 from sqlite3 import Cursor
 import django
 from django.shortcuts import redirect, render
 from accounts.models import Roles, Account
-from .forms import RegistroServicio, TipoEmp, RegistroEmp
+from .forms import RegistroServicio, TipoEmp, RegistroEmp ,RegistroProveedor
 from django.db import connection
 from django.contrib.auth.hashers import make_password
 import cx_Oracle
@@ -29,20 +30,22 @@ def adminHome(request):
 def registrar_servicio(request):
     
     if is_admin(request) == True:
-        form = RegistroServicio()
+        
         try:
+            form = RegistroServicio()
             if request.method == 'POST':
                 form = RegistroServicio(request.POST)
+                
                 if form.is_valid():
                     
                     nombre = form.cleaned_data['nombre']
                     precio = form.cleaned_data['precio']
                     
-
-                    salida = add_servicio(nombre,precio)
+                    
+                    salida = add_servicio(nombre.lower(),precio)
                     mensajes(request,salida)
         except:
-             messages.error(request, 'Houston tenemos problemas.')
+            messages.error(request, 'Houston tenemos problemas. D:')
 
         data ={
             'formulario': form,       
@@ -117,7 +120,6 @@ def mensajes(request,salida):
     else:
         messages.error(request, 'Houston tenemos problemas.')
 
-
 def add_tipo_empleado(seccion):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -155,3 +157,23 @@ def listar(procedimiento):
     for fila in out_cur:
         lista.append(fila)
     return lista
+
+def registrarProveedor(request):
+    if is_admin(request) == True:
+        form = RegistroProveedor()
+        if request.method == 'POST':
+            form = RegistroProveedor(request.POST)
+
+            if form.is_valid():
+                rut = form.cleaned_data['rut_proveedor']
+                name_prov = form.cleaned_data['nombre']
+                correo = form.cleaned_data['correo']
+
+                form.save()
+                return redirect('registrarProveedor')
+        context = {
+            'form' : form,
+        }
+         
+        return render(request, 'administracion/registro_proveedor.html',context)
+    return redirect('home')

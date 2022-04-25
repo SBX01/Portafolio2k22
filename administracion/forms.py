@@ -1,5 +1,6 @@
+from xml.dom import ValidationErr
 from django import forms
-from .models import Empleado, Servicio, TipoEmpleado
+from .models import Empleado, Proveedor, Servicio, TipoEmpleado
 
 class TipoEmp(forms.ModelForm):
     class Meta:
@@ -59,7 +60,7 @@ class RegistroServicio(forms.ModelForm):
     def __init__(self, *args, **kwargs ):
         super(RegistroServicio, self).__init__(*args, **kwargs)
         self.fields['nombre'].widget.attrs['placeholder'] = 'Revisión'
-        self.fields['precio'].widget.attrs['placeholder'] = '50.000'
+        self.fields['precio'].widget.attrs['placeholder'] = '$50.000'
         
 
 
@@ -68,3 +69,21 @@ class RegistroServicio(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super(RegistroServicio, self).clean()
+
+class RegistroProveedor(forms.ModelForm):
+    class Meta:
+        model = Proveedor
+        fields = ['rut_proveedor','nombre','correo']
+
+    def __init__(self, *args, **kwargs ):
+        super(RegistroProveedor, self).__init__(*args, **kwargs)
+        self.fields['rut_proveedor'].widget.attrs['placeholder'] = '11111111-1'
+        self.fields['nombre'].widget.attrs['placeholder'] = 'José'
+        self.fields['correo'].widget.attrs['placeholder'] = 'Jose@pernos.cl'
+        self.fields['rut_proveedor'].widget.attrs['onInput'] = 'checkRut(this)'
+
+        for field in self.fields:
+            self.fields[field].widget.attrs['class']='form-control'
+
+    def clean(self):
+        cleaned_data = super(RegistroProveedor, self).clean()
