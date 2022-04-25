@@ -1,6 +1,7 @@
 {% extends 'administracion\adminHome.html' %} {% block content %}
-<h3>Registro nuevo empleado</h3>
-<div class="row">
+
+<div class="container row">
+    <h3>Registro nuevo empleado</h3>
     <div class="card-body col-sm-2">
 
         <div class="card mx-auto" style="max-width:220px; margin-top:40px; margin-left: 30px;">
@@ -96,7 +97,29 @@
             </article>
         </div>
     </div>
-
+    <div class="card-body col-sm-4">
+        <div class="card mx-auto " style="max-width:520px; margin-top:40px; "></div>
+        
+       <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Rut</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">cargo</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for e in listEmp %}
+            <tr>
+                <td>{{e.rut_emp}}</td>
+                <td>{{e.nombre}} {{e.apellidos}}</td>
+                <td>{{e.id_tipo_emp}}</td>
+              </tr>
+             {%endfor%} 
+        
+        </tbody>
+      </table>
+    </div>
 </div>
 
 

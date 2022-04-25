@@ -1,8 +1,10 @@
 from cmath import e
+from genericpath import exists
 import imp
 from sqlite3 import Cursor
 import django
 from django.shortcuts import redirect, render
+from .models import Empleado, Servicio, TipoEmpleado
 from accounts.models import Roles, Account
 from .forms import RegistroServicio, TipoEmp, RegistroEmp ,RegistroProveedor
 from django.db import connection
@@ -31,22 +33,21 @@ def registrar_servicio(request):
     
     if is_admin(request) == True:
         
-        try:
-            form = RegistroServicio()
-            if request.method == 'POST':
-                form = RegistroServicio(request.POST)
+
+        form = RegistroServicio()
+        if request.method == 'POST':
+            form = RegistroServicio(request.POST)
+            
+            if form.is_valid():
                 
-                if form.is_valid():
-                    
-                    nombre = form.cleaned_data['nombre']
-                    precio = form.cleaned_data['precio']
-                    
-                    
+                nombre = form.cleaned_data['nombre']
+                precio = form.cleaned_data['precio']
+                if Servicio.objects.filter(nombre=nombre).exists():
+                    mensajes(request,0)
+                else:                       
                     salida = add_servicio(nombre.lower(),precio)
                     mensajes(request,salida)
-        except:
-            messages.error(request, 'Houston tenemos problemas. D:')
-
+                    return redirect('registro_servicio')
         data ={
             'formulario': form,       
         }
@@ -62,10 +63,12 @@ def tipo_empleado(request):
 
             if form.is_valid():
                 seccion = form.cleaned_data['seccion']
-
-                salida = add_tipo_empleado(seccion)
-                mensajes(request,salida)
-                return redirect('registro_empleado')
+                if TipoEmpleado.objects.filter(seccion=seccion).exists():
+                    mensajes(request,0)
+                else:
+                    salida = add_tipo_empleado(seccion)
+                    mensajes(request,salida)
+                    return redirect('registro_empleado')
     
         return render(request, 'administracion/registro_empleado.html')
     return redirect('home')
@@ -93,7 +96,7 @@ def registrar_usario(request):
                 #rol = 'worker'
                 #tipo_emp = '4'
                 activo = '1'
-
+                
 
                 pasw = make_password(password)
                 
@@ -108,7 +111,8 @@ def registrar_usario(request):
             'rol' : Roles,
             'form' : form,
             'tip_emp' : listar('sp_lista_tipo_empleado'),
-            'form_emp' : form_emp
+            'form_emp' : form_emp,
+            'listEmp': Empleado.objects.all().filter(activo=1)
         }
         return render(request, 'administracion/registro_empleado.html', context)
     
