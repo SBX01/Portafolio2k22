@@ -59,6 +59,7 @@ class MyAccountManager(BaseUserManager):
             password = password,
             first_name = first_name,
             last_name = last_name,
+            role = 'admin'
         )
         user.is_admin = True
         user.is_active = True

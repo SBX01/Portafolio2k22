@@ -1,5 +1,5 @@
 from django import forms
-from .models import Empleado, TipoEmpleado
+from .models import Empleado, Servicio, TipoEmpleado
 
 class TipoEmp(forms.ModelForm):
     class Meta:
@@ -37,7 +37,7 @@ class RegistroEmp(forms.ModelForm):
         self.fields['apellidos'].widget.attrs['placeholder'] = 'Ingrese apellidos'
         self.fields['telefono'].widget.attrs['placeholder'] = '999 999 999'
         self.fields['usermail'].widget.attrs['placeholder'] = 'Example@example.com'
-        
+        self.fields['rut_emp'].widget.attrs['onInput'] = 'checkRut(this)'
         
         for field in self.fields:
             self.fields[field].widget.attrs['class']='form-control'
@@ -50,3 +50,21 @@ class RegistroEmp(forms.ModelForm):
             raise forms.ValidationError(
                 "Las contrase;as no coinciden"
             )
+
+class RegistroServicio(forms.ModelForm):
+    class Meta:
+        model = Servicio
+        fields = ['nombre','precio']
+
+    def __init__(self, *args, **kwargs ):
+        super(RegistroServicio, self).__init__(*args, **kwargs)
+        self.fields['nombre'].widget.attrs['placeholder'] = 'Revisión'
+        self.fields['precio'].widget.attrs['placeholder'] = '50.000'
+        
+
+
+        for field in self.fields:
+            self.fields[field].widget.attrs['class']='form-control'
+
+    def clean(self):
+        cleaned_data = super(RegistroServicio, self).clean()
