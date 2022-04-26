@@ -1,17 +1,21 @@
-
 --------------------------------------------------------
--- Archivo creado  - sábado-abril-23-2022   
+-- Archivo creado  - martes-abril-26-2022   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Sequence SEQ_ERROR
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##PY_TALLER"."SEQ_ERROR"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##PY_TALLER"."SEQ_ERROR"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_IDSERVICIO
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."SEQ_IDSERVICIO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence SEQ_TIPO_EMP
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##PY_TALLER"."SEQ_TIPO_EMP"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 5 NOCACHE  ORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##PY_TALLER"."SEQ_TIPO_EMP"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 15 NOCACHE  ORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Procedure SP_AGREGAR_CLIENTE
 --------------------------------------------------------
@@ -88,6 +92,37 @@ exception
 end;
 
 
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_AGREGAR_SERVICIO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "C##PY_TALLER"."SP_AGREGAR_SERVICIO" 
+  (
+v_name servicio.nombre%type,
+v_precio servicio.precio%type,
+
+v_salida out number
+
+)
+is
+begin
+
+insert into servicio
+values(SEQ_IDSERVICIO.nextval,v_name,v_precio,1);
+commit;
+
+v_salida :=1;
+exception
+    when DUP_VAL_ON_INDEX THEN
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error de dato duplicado');
+    WHEN OTHERS THEN 
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido');
+END SP_AGREGAR_SERVICIO;
+
 /
 --------------------------------------------------------
 --  DDL for Procedure SP_AGREGAR_TRABAJADOR
@@ -160,6 +195,7 @@ exception
         RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido');
 end;
 
+
 /
 --------------------------------------------------------
 --  DDL for Procedure SP_LISTA_TIPO_EMPLEADO
@@ -177,13 +213,14 @@ END;
 
 
 
+
 /
 --------------------------------------------------------
 --  DDL for Procedure SP_TIPO_EMPLEADO
 --------------------------------------------------------
 set define off;
 
-  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_TIPO_EMPLEADO"  
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_TIPO_EMPLEADO" 
 (
 v_seccion tipo_empleado.seccion%type,
 
@@ -205,5 +242,6 @@ exception
         v_salida:=0;
         RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido');
 end;
+
 
 /

@@ -6,6 +6,8 @@ Para poder comenzar a ejecutar el proyecto Necesita tener instalado python y el 
 
 Ejecutar los scripts SQL y DDL de creación de usuario y tablas.
 
+Ejecutar el script PROCEDIMIENTOS.SQL incluida en este proyecto.
+
 Mediante la terminal vaya a la carpeta del proyecto y escriba el siguiente comando:
 
 > python manage.py migrate
