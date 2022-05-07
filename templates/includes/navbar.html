@@ -8,7 +8,6 @@
   <div class="collapse navbar-collapse" id="navbarTop4">
 
     <ul class="navbar-nav">
-		<li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
 		<li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Llamanos</a></li>
 	</ul> <!-- list-inline //  -->
   </div> <!-- navbar-collapse .// -->
@@ -18,46 +17,44 @@
 <section class="header-main border-bottom">
 	<div class="container">
 <div class="row align-items-center">
-	<div class="col-lg-2 col-md-3 col-6">
+	<div class="col-lg-9 col-md-3 col">
 		<a href="{% url 'home'%}" class="brand-wrap">
 			<!--img class="logo" src="#"-->
 		</a> <!-- brand-wrap.// -->
 	</div>
 		
-	<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
-				<div class="d-flex justify-content-end mb-3 mb-lg-0">
-					
-
-          {% if user.id is None %}
-          <div class="widget-header">
-            <small class="title text-muted">Bienvenido visitante!</small>
-            <div>
-              <a href="{% url 'login'%}">Login</a> <span class="dark-transp"> | </span>
-              <a href="{% url 'register'%}"> Registrar</a>
-            </div>
-          </div>
-
-          {% else %}
-
-
-          <div class="widget-header">
-						<small class="title text-muted">Bienvenido {{ user.first_name }}! {{user.role}}</small>
-						<div>
-							<a href="#">Dashboard</a> <span class="dark-transp"> | </span>
-							<a href="{% url 'logout'%}"> Cerrar sesion </a>
-							{% if user.is_staff %}
-							<a href="{% url 'Administracion'%}"> Administracion </a>
-							{% endif %}
-						</div>
+	<div class="col-lg-3 col-sm-6 col" id="login">
+				<div class="d-flex justify-content-end">
+					{% if user.id is None %}
+					<div class="widget-header">
+					  <small class="title text-muted">Bienvenido visitante!</small>
+					  <div>
+						<a href="{% url 'login'%}">Login</a> <span class="dark-transp"> | </span>
+						<a href="{% url 'register'%}"> Registrar</a>
+					  </div>
 					</div>
-
-          {% endif %}
-
-
+		  
+					{% else %}
+		  
+		  
+					<div class="widget-header">
+								  <small class="title text-muted">Bienvenido {{ user.first_name }}! {{user.role}}</small>
+								  <div>
+									  <a href="#">Dashboard</a> <span class="dark-transp"> | </span>
+									  <a href="{% url 'logout'%}"> Cerrar sesion </a>
+									  {% if user.is_staff %}
+									  <a href="{% url 'Administracion'%}"> Administracion </a>
+									  {% endif %}
+								  </div>
+							  </div>
+		  
+					{% endif %}
 					<a href="#" class="widget-header pl-3 ml-3">
 						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
 						<span class="badge badge-pill badge-danger notify"></span>
-					</a>
+					</a>	
+				</div>
+					
 				</div> <!-- widgets-wrap.// -->
 			</div> <!-- col.// -->
 </div> <!-- row.// -->

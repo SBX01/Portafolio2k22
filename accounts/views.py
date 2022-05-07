@@ -37,8 +37,8 @@ def register(request):
 
             pasw = make_password(password)
             #llamar al procedimiento almacenado
-            agregar_cliente(run,first_name,last_name,phone_number,1,email,pasw,rut_emp,giro,razon)
-
+            salida = agregar_cliente(run,first_name,last_name,phone_number,1,email,pasw,rut_emp,giro,razon)
+            
             
             #manda link de activacion de cuenta al correo
             current_site = get_current_site(request)
@@ -52,9 +52,7 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, body, to=[to_email])
             send_email.send()
-
-
-            #messages.success(request, 'Se registro el Usuario exitosamente')
+           
             return redirect('/accounts/login/?command=verification&email='+email)
 
     context = {
@@ -131,6 +129,11 @@ def activate(request, uidb64, token):
 def dashboard(request):
     return render(request,'accounts/dashboard.html')
 
+def mensajes(request,salida):
+    if salida == 1:
+        messages.success(request, 'Se agregó correctamente.')
+    else:
+        messages.error(request, 'Houston tenemos problemas.')
 
 def forgotPassword(request):
     if request.method == 'POST':

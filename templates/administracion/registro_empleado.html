@@ -2,11 +2,12 @@
 
 <div class="container row">
     <h3>Registro nuevo empleado</h3>
+    {% include 'includes/alerts.html'%}
     <div class="card-body col-sm-2">
 
         <div class="card mx-auto" style="max-width:220px; margin-top:40px; margin-left: 30px;">
             <h4>Agregar tipo de empleado</h4>
-            {% include 'includes/alerts.html'%}
+            
             <form action="{% url 'tipo_empleado'%}" method="post">
                 {% csrf_token %}
 
