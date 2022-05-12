@@ -179,7 +179,7 @@ class Empleado(models.Model):
     apellidos = models.CharField(max_length=50)
     telefono = models.IntegerField()
     activo = models.FloatField()
-    id_tipo_emp = models.ForeignKey('TipoEmpleado', models.DO_NOTHING, db_column='id_tipo_emp')
+    id_tipo_emp = models.ForeignKey('TipoEmpleado',on_delete=models.RESTRICT, db_column='id_tipo_emp')
     usermail = models.CharField(max_length=100)
     password = models.CharField(max_length=300)
 
