@@ -287,7 +287,7 @@ class Servicio(models.Model):
     id_sevicio = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=35)
     precio = models.IntegerField()
-    enuso = models.FloatField()
+    enuso = models.BooleanField()
 
     class Meta:
         managed = False

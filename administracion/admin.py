@@ -26,8 +26,13 @@ class GrupoProductoAdmin(admin.ModelAdmin):
     fields = ['nombre','tipo_producto']
     list_display = ('nombre','tipo_producto')
 
+class ServicioAdmin(admin.ModelAdmin):
+    fields = ['nombre','precio','enuso']
+    list_display = ('nombre','precio')
+
 
 # Register your models here.
+admin.site.register(Servicio, ServicioAdmin)
 admin.site.register(TipoProducto, TipoProductoAdmin)
 admin.site.register(GrupoProducto, GrupoProductoAdmin)
 admin.site.register(MedioPago, MedioPagoAdmin)

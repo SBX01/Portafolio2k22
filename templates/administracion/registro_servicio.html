@@ -42,9 +42,15 @@
                     <td>{{s.nombre}}</td>
                     <td>{{s.precio}}</td>
                     <td>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{s.id_sevicio}}">
+                        <button type="button" class="btn btn-danger">
                             <a style="text-decoration:none; color:white" href="{% url 'eliminar_servicio' s.id_sevicio%}">
                             Eliminar
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning">
+                            <a style="text-decoration:none; color:white" href="{% url 'editar_servicio' s.id_sevicio%}">
+                            Editar
                         </button>
                     </td>
                        

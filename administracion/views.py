@@ -1,6 +1,8 @@
+from ast import Pass
 from cmath import e
 from genericpath import exists
 import imp
+from pickle import TRUE
 from sqlite3 import Cursor
 import django
 from django.shortcuts import redirect, render
@@ -18,7 +20,11 @@ def is_admin(request):
     #validacion verga xd
     if request.user.role == 'admin':
         return True
-    
+def hardAdmin(request):
+    if is_admin(request) == True:
+        return render (request,'admin')
+    return redirect('home')
+
 def adminHome(request):
 
     if is_admin(request) == True:
@@ -61,6 +67,25 @@ def eliminarServicio(request,idServ):
     serv.enuso = 0
     serv.save()
     return redirect('registro_servicio')
+
+def editarServicio(request,idServ):
+    serv = Servicio.objects.get(id_sevicio=idServ)
+    if request.method == 'POST':
+        form = RegistroServicio(request.POST,instance=serv)
+        if form.is_valid():
+            if Servicio.objects.filter(nombre=serv.nombre.lower()).exists():
+                serv.precio = form.cleaned_data['precio']
+                serv.save()
+                mensajes(request,1)
+            else:                       
+                mensajes(request,0)
+                return redirect('registro_servicio')
+           
+            return redirect('registro_servicio')
+    else:
+        form = RegistroServicio(instance=serv)
+    context = {'form' : form,'serv':serv}
+    return render(request,'administracion/editar_servicio.html',context)
 
 
 def tipo_empleado(request):
@@ -129,7 +154,7 @@ def mensajes(request,salida):
     if salida == 1:
         messages.success(request, 'Se agregó correctamente.')
     else:
-        messages.error(request, 'Houston tenemos problemas.')
+        messages.error(request, 'Houston tenemos problemas.' )
 
 def add_tipo_empleado(seccion):
     django_cursor = connection.cursor()
