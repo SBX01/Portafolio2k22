@@ -106,7 +106,6 @@ def registrar_usario(request):
                 mensajes(request,salida)
                 return redirect('registro_empleado')
 
-
         context = {
             'rol' : Roles,
             'form' : form,
@@ -181,3 +180,10 @@ def registrarProveedor(request):
          
         return render(request, 'administracion/registro_proveedor.html',context)
     return redirect('home')
+
+
+def eliminarEmp(request,rut_empleado):
+    emp = Empleado.objects.get(rut_emp = rut_empleado)
+    emp.activo = 0
+    emp.save()
+    return redirect('registro_empleado')
