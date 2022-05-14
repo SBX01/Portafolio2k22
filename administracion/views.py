@@ -42,18 +42,26 @@ def registrar_servicio(request):
                 
                 nombre = form.cleaned_data['nombre']
                 precio = form.cleaned_data['precio']
-                if Servicio.objects.filter(nombre=nombre).exists():
+                if Servicio.objects.filter(nombre=nombre.lower()).exists():
                     mensajes(request,0)
                 else:                       
                     salida = add_servicio(nombre.lower(),precio)
                     mensajes(request,salida)
                     return redirect('registro_servicio')
         data ={
-            'formulario': form,       
+            'formulario': form,   
+            'listServicios': Servicio.objects.all().filter(enuso=1)    
         }
 
         return render(request,'administracion/registro_servicio.html', data)
     return redirect('home')
+
+def eliminarServicio(request,idServ):
+    serv = Servicio.objects.get(id_sevicio=idServ)
+    serv.enuso = 0
+    serv.save()
+    return redirect('registro_servicio')
+
 
 def tipo_empleado(request):
     if is_admin(request) == True:

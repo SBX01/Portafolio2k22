@@ -4,8 +4,9 @@
 <p>Hola usuario {{user.first_name}}</p>
 <br><br><br>
 
-<div class="container">
-    <h4>Agregar Servicio</h4>
+<div class="container row">
+    <div class="col-sm-6">
+        <h4>Agregar Servicio</h4>
     {% include 'includes/alerts.html'%}
     <form name="formulario" action="{% url 'registro_servicio' %}" method="post">
         {% csrf_token %}
@@ -25,6 +26,36 @@
         <!-- form-group// -->
 
     </form>
+    </div>
+    <div class="col-sm-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre Servicio</th>
+                    <th>Precio Servicio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in listServicios %}
+                <tr>
+                   
+                    <td>{{s.nombre}}</td>
+                    <td>{{s.precio}}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{s.id_sevicio}}">
+                            <a style="text-decoration:none; color:white" href="{% url 'eliminar_servicio' s.id_sevicio%}">
+                            Eliminar
+                        </button>
+                    </td>
+                       
+                </tr>
+                {%endfor%} 
+            </tbody>
+        </table>
+
+    </div>
+
+    
 </div>
 <!-- === ALERTAS === -->
 <script>
