@@ -18,6 +18,21 @@ class TipoEmp(forms.ModelForm):
     def clean(self):
         cleaned_data = super(TipoEmp, self).clean()
 
+class UpdateEmp(forms.ModelForm):
+    class Meta:
+        model = Empleado
+        fields = ['nombre','apellidos','telefono']
+    def __init__(self, *args, **kwargs ):
+        super(UpdateEmp, self).__init__(*args, **kwargs)
+        self.fields['nombre'].widget.attrs['placeholder'] = 'Ingrese nombre'
+        self.fields['apellidos'].widget.attrs['placeholder'] = 'Ingrese apellidos'
+        self.fields['telefono'].widget.attrs['placeholder'] = '999 999 999'
+        for field in self.fields:
+            self.fields[field].widget.attrs['class']='form-control'
+
+    def clean(self):
+        cleaned_data = super(UpdateEmp, self).clean()
+
 class RegistroEmp(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Ingrese password',
@@ -29,7 +44,7 @@ class RegistroEmp(forms.ModelForm):
     }))
     class Meta:
         model = Empleado
-        fields = ['rut_emp','nombre','apellidos','telefono','usermail','password']
+        fields = ['rut_emp','nombre','apellidos','telefono','usermail','password','activo']
 
     def __init__(self, *args, **kwargs ):
         super(RegistroEmp, self).__init__(*args, **kwargs)
@@ -38,6 +53,7 @@ class RegistroEmp(forms.ModelForm):
         self.fields['apellidos'].widget.attrs['placeholder'] = 'Ingrese apellidos'
         self.fields['telefono'].widget.attrs['placeholder'] = '999 999 999'
         self.fields['usermail'].widget.attrs['placeholder'] = 'Example@example.com'
+        self.fields['activo']
         self.fields['rut_emp'].widget.attrs['onInput'] = 'checkRut(this)'
         
         for field in self.fields:

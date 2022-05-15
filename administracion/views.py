@@ -8,7 +8,7 @@ import django
 from django.shortcuts import redirect, render
 from .models import Empleado, Servicio, TipoEmpleado
 from accounts.models import Roles, Account
-from .forms import RegistroServicio, TipoEmp, RegistroEmp ,RegistroProveedor
+from .forms import RegistroServicio, TipoEmp, RegistroEmp ,RegistroProveedor, UpdateEmp
 from django.db import connection
 from django.contrib.auth.hashers import make_password
 import cx_Oracle
@@ -20,10 +20,7 @@ def is_admin(request):
     #validacion verga xd
     if request.user.role == 'admin':
         return True
-def hardAdmin(request):
-    if is_admin(request) == True:
-        return render (request,'admin')
-    return redirect('home')
+
 
 def adminHome(request):
 
@@ -87,6 +84,39 @@ def editarServicio(request,idServ):
     context = {'form' : form,'serv':serv}
     return render(request,'administracion/editar_servicio.html',context)
 
+def editarEmpleado(request,rut):
+    emp = Empleado.objects.get(rut_emp=rut)
+    if request.method == 'POST':
+        form = UpdateEmp(request.POST,instance=emp)
+        if form.is_valid():
+            print('formulario valido') 
+            if Empleado.objects.filter(rut_emp=emp.rut_emp).exists():
+                emp.nombre = form.cleaned_data['nombre']
+                emp.apellido = form.cleaned_data['apellidos']
+                emp.telefono = form.cleaned_data['telefono']            
+                rol = request.POST.get('rol','')
+                emp.tipo_emp = request.POST.get('tipo_empleado','')
+                emp.save()
+                mensajes(request,1)
+                print('si pasa')
+                return redirect('registro_empleado')
+            else:                
+                print('no pasa')       
+                mensajes(request,0)
+                return redirect('editar_empleado')
+        else:
+            print('formulario  no valido')    
+    else:
+        print('no pasa a post') 
+        form = RegistroEmp(instance=emp)
+    context = {
+        'form' : form,
+        'emp':emp,
+        'rol' : Roles,
+        'tip_emp' : listar('sp_lista_tipo_empleado'),
+        }
+    return render(request,'administracion/editar_empleado.html',context)
+
 
 def tipo_empleado(request):
     if is_admin(request) == True:
@@ -126,18 +156,23 @@ def registrar_usario(request):
                 username = email.split("@")[0]
                 rol = request.POST.get('rol','')
                 tipo_emp = request.POST.get('tipo_empleado','')
+
                 #rol = 'worker'
                 #tipo_emp = '4'
                 activo = '1'
                 
 
                 pasw = make_password(password)
-                
-                user = Account.objects.create_employee(first_name=nombre, last_name=apellido,phone_number =telefono, email=email, username=username, password=password, role=rol)
-                user.save()
-                salida = add_empleado(run,nombre,apellido,telefono,activo,tipo_emp,email,pasw)
-                mensajes(request,salida)
-                return redirect('registro_empleado')
+                if rol == 'worker':
+                   
+                    user = Account.objects.create_employee(first_name=nombre, last_name=apellido,phone_number =telefono, email=email, username=username, password=password, role=rol)
+                    user.save()
+                    salida = add_empleado(run,nombre,apellido,telefono,activo,tipo_emp,email,pasw)
+                    mensajes(request,salida)
+                    return redirect('registro_empleado')
+                else:
+                    mensajes(request,0)
+                    return redirect('registro_empleado')
 
         context = {
             'rol' : Roles,
@@ -152,7 +187,7 @@ def registrar_usario(request):
     
 def mensajes(request,salida):
     if salida == 1:
-        messages.success(request, 'Se agregó correctamente.')
+        messages.success(request, 'El proceso se finalizó correctamente.')
     else:
         messages.error(request, 'Houston tenemos problemas.' )
 
