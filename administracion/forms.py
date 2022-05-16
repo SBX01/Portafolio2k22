@@ -1,6 +1,21 @@
 from xml.dom import ValidationErr
+
 from django import forms
-from .models import Empleado, Proveedor, Servicio, TipoEmpleado
+
+from .models import Empleado, Producto, Proveedor, Servicio, TipoEmpleado
+
+import datetime
+
+#dick
+UnidadMedida=(
+    ('unidad','c/u'),
+    ('centimetro cubico','cc'),
+    ('pulgada','in'),
+    ('litro','L'),
+    ('centimetro','cm')
+)
+
+
 
 class TipoEmp(forms.ModelForm):
     class Meta:
@@ -17,6 +32,33 @@ class TipoEmp(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super(TipoEmp, self).clean()
+
+class DateInput(forms.DateTimeInput):
+    input_type = 'datetime-local'
+
+class AddProducto(forms.ModelForm):
+    date = forms.DateField(widget=DateInput)
+
+    medida = forms.ChoiceField(choices=UnidadMedida)
+
+    class Meta:
+        model = Producto
+        fields = ['nombre_corto','descripcion','precio_compra','precio_venta','stock','stock_critico']
+
+    def __init__(self, *args, **kwargs ):
+        super(AddProducto, self).__init__(*args, **kwargs)
+        self.fields['nombre_corto'].widget.attrs['placeholder'] = 'Nehumático diagonal 16'
+        self.fields['descripcion'].widget.attrs['placeholder'] = 'Nehumático diagonal aro 16'
+        self.fields['precio_compra'].widget.attrs['placeholder'] = '125000'
+        self.fields['precio_venta'].widget.attrs['placeholder'] = '131990'
+        self.fields['stock'].widget.attrs['placeholder'] = '1000'
+        self.fields['stock_critico'].widget.attrs['placeholder'] = '75'
+
+        for field in self.fields:
+            self.fields[field].widget.attrs['class']='form-control'
+
+    def clean(self):
+        cleaned_data = super(AddProducto, self).clean()
 
 class UpdateEmp(forms.ModelForm):
     class Meta:

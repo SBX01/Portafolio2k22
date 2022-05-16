@@ -200,6 +200,9 @@ class GrupoProducto(models.Model):
         managed = False
         db_table = 'grupo_producto'
 
+    def __str__(self):
+        return self.nombre
+
 
 class MedioPago(models.Model):
     id_pago = models.IntegerField(primary_key=True)
@@ -322,6 +325,9 @@ class TipoProducto(models.Model):
     class Meta:
         managed = False
         db_table = 'tipo_producto'
+
+    def __str__(self):
+        return str(self.nombre)
 
 
 class Vehiculo(models.Model):

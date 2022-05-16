@@ -6,9 +6,9 @@ from pickle import TRUE
 from sqlite3 import Cursor
 import django
 from django.shortcuts import redirect, render
-from .models import Empleado, Servicio, TipoEmpleado
+from .models import Empleado, GrupoProducto, Producto, Servicio, TipoEmpleado
 from accounts.models import Roles, Account
-from .forms import RegistroServicio, TipoEmp, RegistroEmp ,RegistroProveedor, UpdateEmp
+from .forms import AddProducto, RegistroServicio, TipoEmp, RegistroEmp ,RegistroProveedor, UpdateEmp
 from django.db import connection
 from django.contrib.auth.hashers import make_password
 import cx_Oracle
@@ -31,18 +31,12 @@ def adminHome(request):
 
     return redirect('home')
 
-
 def registrar_servicio(request):
-    
     if is_admin(request) == True:
-        
-
         form = RegistroServicio()
         if request.method == 'POST':
             form = RegistroServicio(request.POST)
-            
             if form.is_valid():
-                
                 nombre = form.cleaned_data['nombre']
                 precio = form.cleaned_data['precio']
                 if Servicio.objects.filter(nombre=nombre.lower()).exists():
@@ -55,7 +49,6 @@ def registrar_servicio(request):
             'formulario': form,   
             'listServicios': Servicio.objects.all().filter(enuso=1)    
         }
-
         return render(request,'administracion/registro_servicio.html', data)
     return redirect('home')
 
@@ -117,7 +110,6 @@ def editarEmpleado(request,rut):
         }
     return render(request,'administracion/editar_empleado.html',context)
 
-
 def tipo_empleado(request):
     if is_admin(request) == True:
         form = TipoEmp()
@@ -150,7 +142,6 @@ def registrar_usario(request):
                 nombre = form_emp.cleaned_data['nombre']
                 apellido = form_emp.cleaned_data['apellidos']
                 telefono = form_emp.cleaned_data['telefono']
-                
                 email = form_emp.cleaned_data['usermail']
                 password = form_emp.cleaned_data['password']
                 username = email.split("@")[0]
@@ -249,9 +240,40 @@ def registrarProveedor(request):
         return render(request, 'administracion/registro_proveedor.html',context)
     return redirect('home')
 
-
 def eliminarEmp(request,rut_empleado):
     emp = Empleado.objects.get(rut_emp = rut_empleado)
     emp.activo = 0
     emp.save()
     return redirect('registro_empleado')
+
+def addProducto(request):
+    if is_admin(request) == True:
+        form = AddProducto()
+        if request.method == 'POST':
+            form = AddProducto(request.POST)
+            if form.is_valid():
+                #SKU -> slice python
+                nombre = form.cleaned_data['nombre_corto']
+                descripcion = form.cleaned_data['descripcion']
+                precio_compra = form.cleaned_data['precio_compra']
+                precio_venta = form.cleaned_data['precio_venta']
+                stock = form.cleaned_data['stock']
+                stock_critico = form.cleaned_data['stock_critico']
+                fecha = form.cleaned_data['date']
+                um = form.cleaned_data['medida']
+                enuso = True
+                id_grupo = request.POST.get('categoria','')
+                if Producto.objects.filter(nombre_corto=nombre.lower()).exists():
+                    mensajes(request,0)
+                else: 
+                                        
+                    form.save()
+                    mensajes(request,1)
+                    return redirect('agregar_producto')
+        data ={
+            'form': form,   
+            'categorias': GrupoProducto.objects.all()
+        }
+        print(data['categorias'])
+        return render(request,'administracion/agregar_producto.html', data)
+    return redirect('home')
