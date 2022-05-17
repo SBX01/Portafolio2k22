@@ -252,7 +252,13 @@ def addProducto(request):
         if request.method == 'POST':
             form = AddProducto(request.POST)
             if form.is_valid():
-                #SKU -> slice python
+                id_producto = ''
+                #SKU -> slice python 
+                # 999 id proveedor
+                # 999 grupo producto
+                # 99999999 fecha de vencimiento
+                # 999 tipo de producto
+                
                 nombre = form.cleaned_data['nombre_corto']
                 descripcion = form.cleaned_data['descripcion']
                 precio_compra = form.cleaned_data['precio_compra']

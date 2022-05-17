@@ -1,0 +1,69 @@
+{% extends 'administracion\adminHome.html' %}{% block content %}
+<div class="card-body col-sm-6">
+    <div class="card mx-auto " style="max-width:520px; margin-top:40px; ">
+        {% include 'includes/alerts.html'%}
+        <article class="card-body">
+            <header class="mb-4">
+                <h4 class="card-title">Agregar Producto</h4>
+                <h6>Todos los campos marcados con un asterisco son de carácter obligatorio</h6>
+            </header>
+            <form action="{% url 'agregar_producto' %} " method="POST" class="was-validated">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Nombre <span style="color:#ff0000">*</span></label> {{form.nombre_corto}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>descripcion <span style="color:#ff0000">*</span></label> {{form.descripcion}}
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Precio compra <span style="color:#ff0000">*</span></label> {{form.precio_compra}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Precio venta <span style="color:#ff0000">*</span></label> {{form.precio_venta}}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Stock <span style="color:#ff0000">*</span></label> {{form.stock}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Nivel de stock crítico<span style="color:#ff0000">*</span></label> {{form.stock_critico}}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>fecha de vencimiento</label> {{form.date}}
+                    </div>                  
+                    <div class="form-group col-md-6">
+                        <label>Unidad de medida<span style="color:#ff0000">*</span></label> {{form.medida}}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputFile">Tipo de producto <span style="color:#ff0000">*</span></label>
+                        <select class="form-control" name="categorias" id="categorias" required="">
+                            <option value="">Seleccione categoria</option>
+                            {% for grupo in categorias %}
+                            <option value="{{grupo.id_categoria}}">{{grupo.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <button type="submit" class="btn btn-warning btn-block"> Guardar cambios </button>
+                    </div>
+                    <!-- form-group// -->
+                </div>
+            </form>
+        </article>
+    </div>
+</div>
+
+{%endblock%}
