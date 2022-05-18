@@ -45,15 +45,32 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="exampleInputFile">Tipo de producto <span style="color:#ff0000">*</span></label>
-                        <select class="form-control" name="categorias" id="categorias" required="">
-                            <option value="">Seleccione categoria</option>
-                            {% for grupo in categorias %}
-                            <option value="{{grupo.id_categoria}}">{{grupo.nombre}}</option>
+                        <label for="exampleInputFile">Categoria<span style="color:#ff0000">*</span></label>
+                        <select class="form-control" onchange="sub_proceso()" name="categorias" id="categorias" required="">
+                            <!--option value="">Seleccione categoria</option-->
+                            {% for pr in tipos %}
+                                <option value="{{pr.id}}">{{pr.nombre}}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputFile">Proveedor del producto<span style="color:#ff0000">*</span></label>
+                        <select class="form-control" name="proveedores" id="proveedores" required="">
+                            <option value="">Seleccione Proveedor</option>
+                            {% for proveedor in supliers %}
+                            <option value="{{proveedor.rut_proveedor}}">{{proveedor.nombre}}</option>
                             {% endfor %}
                         </select>
                     </div>
-
+                </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputFile"> subcategoria<span style="color:#ff0000">*</span></label>
+                    <select class="form-control" name="tipos" id="tipos" required="">
+                        <option value="">Seleccione la sub categoria</option>
+                        
+                    </select>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -65,5 +82,24 @@
         </article>
     </div>
 </div>
+
+<script>
+    function sub_proceso(){
+        let id_cat = document.getElementById("categorias").value;
+
+        let url = '/administracion/categoria/?categorias=' + id_cat;
+
+        fetch(url)
+            .then(function(result){
+                return result.text();
+            })
+            .then(function(result){
+                document.getElementById("tipos").innerHTML = result;
+            });
+
+        //alert("categoria id : " + id_cat);
+    }
+
+</script>
 
 {%endblock%}

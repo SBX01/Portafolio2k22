@@ -6,7 +6,7 @@ from pickle import TRUE
 from sqlite3 import Cursor
 import django
 from django.shortcuts import redirect, render
-from .models import Empleado, GrupoProducto, Producto, Servicio, TipoEmpleado
+from .models import Empleado, GrupoProducto, Producto, Proveedor, Servicio, TipoEmpleado, TipoProducto
 from accounts.models import Roles, Account
 from .forms import AddProducto, RegistroServicio, TipoEmp, RegistroEmp ,RegistroProveedor, UpdateEmp
 from django.db import connection
@@ -227,12 +227,16 @@ def registrarProveedor(request):
             form = RegistroProveedor(request.POST)
 
             if form.is_valid():
-                rut = form.cleaned_data['rut_proveedor']
+                
+                rut = form.cleaned_data['rut_proveedor']            
                 name_prov = form.cleaned_data['nombre']
                 correo = form.cleaned_data['correo']
-
-                form.save()
-                return redirect('registrarProveedor')
+                if Proveedor.objects.filter(rut_proveedor=rut).exists():
+                    mensajes(request,0)
+                else:
+                    mensajes(request,1)
+                    form.save()
+                    return redirect('registro_Proveedor')
         context = {
             'form' : form,
         }
@@ -252,12 +256,7 @@ def addProducto(request):
         if request.method == 'POST':
             form = AddProducto(request.POST)
             if form.is_valid():
-                id_producto = ''
-                #SKU -> slice python 
-                # 999 id proveedor
-                # 999 grupo producto
-                # 99999999 fecha de vencimiento
-                # 999 tipo de producto
+
                 
                 nombre = form.cleaned_data['nombre_corto']
                 descripcion = form.cleaned_data['descripcion']
@@ -268,18 +267,72 @@ def addProducto(request):
                 fecha = form.cleaned_data['date']
                 um = form.cleaned_data['medida']
                 enuso = True
-                id_grupo = request.POST.get('categoria','')
-                if Producto.objects.filter(nombre_corto=nombre.lower()).exists():
-                    mensajes(request,0)
+                id_grupo = request.POST.get('categorias','')
+                rut_prov = request.POST.get('proveedores','')
+                print(rut_prov)
+                id_producto = rut_prov[:3]
+                if id_grupo == '':
+                    pass
                 else: 
+                    id_cat = int(id_grupo)
+                    if id_cat <= 9:
+                        id_grupo = '00' + id_grupo
+                        print(id_grupo[:3])
+                    elif id_cat >= 10 and  id_cat <= 99:
+                        id_grupo = '0'+ id_grupo
+                id_producto = id_producto + id_grupo[:3]
+                if fecha == '':
+                    fecha = '00000000'
+                else:
+                    fecha = fecha.replace('/','')
+                id_producto = id_producto + fecha
+
+                #id_producto = id_producto + id_grupo[:3]
+                #sacar rut de proveedor
+                #SKU -> slice python 
+                # 999 id proveedor *
+                # 999 grupo producto *
+                # 99999999 fecha de vencimiento*
+                # 999 tipo de producto
+                # if Producto.objects.filter(nombre_corto=nombre.lower()).exists():
+                #     mensajes(request,0)
+                # else: 
                                         
-                    form.save()
-                    mensajes(request,1)
-                    return redirect('agregar_producto')
+                #     form.save()
+                #     mensajes(request,1)
+                #     return redirect('agregar_producto')
+
         data ={
             'form': form,   
-            'categorias': GrupoProducto.objects.all()
+            'categorias': GrupoProducto.objects.all(),
+            'supliers': Proveedor.objects.all(),
+            'tipos': TipoProducto.objects.all()
         }
-        print(data['categorias'])
+        id_grupo = request.POST.get('categorias','')
+        if id_grupo == '':
+            pass
+        else: 
+            id_cat = int(id_grupo)
+            if id_cat <= 9:
+                id_grupo = '00' + id_grupo
+                print(id_grupo[:3])
+            elif id_cat >= 10 and  id_cat <= 99:
+                id_grupo = '0'+ id_grupo
+                print(id_grupo[:3])
+        print(id_grupo[:3])        
         return render(request,'administracion/agregar_producto.html', data)
     return redirect('home')
+
+
+def categoria_subCategoria(request):
+    cat = request.GET.get('categorias')
+
+    context = {
+        'sub_categoria' : GrupoProducto.objects.filter(tipo_producto = cat)
+    }
+
+    return render(request,'administracion/sub_categoria.html', context)
+
+
+def addVehiculo():
+    pass
