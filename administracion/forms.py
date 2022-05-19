@@ -34,10 +34,10 @@ class TipoEmp(forms.ModelForm):
         cleaned_data = super(TipoEmp, self).clean()
 
 class DateInput(forms.DateTimeInput):
-    input_type = 'datetime-local'
+    input_type = 'date' #'datetime-local' para fecha y hora
 
 class AddProducto(forms.ModelForm):
-    date = forms.DateField(widget=DateInput)
+    date = forms.DateField(widget=DateInput, required=False)
 
     medida = forms.ChoiceField(choices=UnidadMedida)
 

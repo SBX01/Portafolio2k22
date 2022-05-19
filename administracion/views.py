@@ -4,6 +4,7 @@ from genericpath import exists
 import imp
 from pickle import TRUE
 from sqlite3 import Cursor
+from time import strftime
 import django
 from django.shortcuts import redirect, render
 from .models import Empleado, GrupoProducto, Producto, Proveedor, Servicio, TipoEmpleado, TipoProducto
@@ -257,7 +258,6 @@ def addProducto(request):
             form = AddProducto(request.POST)
             if form.is_valid():
 
-                
                 nombre = form.cleaned_data['nombre_corto']
                 descripcion = form.cleaned_data['descripcion']
                 precio_compra = form.cleaned_data['precio_compra']
@@ -269,7 +269,7 @@ def addProducto(request):
                 enuso = True
                 id_grupo = request.POST.get('categorias','')
                 rut_prov = request.POST.get('proveedores','')
-                print(rut_prov)
+                tipo = request.POST.get('tipos','')
                 id_producto = rut_prov[:3]
                 if id_grupo == '':
                     pass
@@ -281,45 +281,44 @@ def addProducto(request):
                     elif id_cat >= 10 and  id_cat <= 99:
                         id_grupo = '0'+ id_grupo
                 id_producto = id_producto + id_grupo[:3]
-                if fecha == '':
+                print('esta es la fecha: '+ fecha.strftime("%m/%d/%Y"))
+                if fecha is None:
                     fecha = '00000000'
                 else:
+                    fecha = fecha.strftime("%m/%d/%Y")
                     fecha = fecha.replace('/','')
                 id_producto = id_producto + fecha
-
-                #id_producto = id_producto + id_grupo[:3]
-                #sacar rut de proveedor
-                #SKU -> slice python 
-                # 999 id proveedor *
-                # 999 grupo producto *
-                # 99999999 fecha de vencimiento*
+                id_producto = id_producto + tipo[:3]
                 # 999 tipo de producto
-                # if Producto.objects.filter(nombre_corto=nombre.lower()).exists():
-                #     mensajes(request,0)
-                # else: 
-                                        
-                #     form.save()
-                #     mensajes(request,1)
-                #     return redirect('agregar_producto')
+                #se vuelven a cargar las variables
+                nombre = form.cleaned_data['nombre_corto']
+                descripcion = form.cleaned_data['descripcion']
+                precio_compra = form.cleaned_data['precio_compra']
+                precio_venta = form.cleaned_data['precio_venta']
+                stock = form.cleaned_data['stock']
+                stock_critico = form.cleaned_data['stock_critico']
+                um = form.cleaned_data['medida']
+                enuso = True
+                id_grupo = request.POST.get('tipos','')
+                rut_prov = request.POST.get('proveedores','')
+                tipo = request.POST.get('tipos','')
+                rut_prov = rut_prov.replace(' ','')
+                fecha = form.cleaned_data['date']
+                if fecha is None:
+                    fecha = '00000000'
+                if Producto.objects.filter(nombre_corto=nombre.lower()).exists():
+                    mensajes(request,0)
+                else: 
+                    resultado = registroProducto(id_producto,nombre,descripcion,precio_compra,precio_venta,stock,stock_critico,id_grupo,um,rut_prov,fecha)
+                    mensajes(request,resultado)
+                    return redirect('agregar_producto')
 
         data ={
             'form': form,   
             'categorias': GrupoProducto.objects.all(),
             'supliers': Proveedor.objects.all(),
             'tipos': TipoProducto.objects.all()
-        }
-        id_grupo = request.POST.get('categorias','')
-        if id_grupo == '':
-            pass
-        else: 
-            id_cat = int(id_grupo)
-            if id_cat <= 9:
-                id_grupo = '00' + id_grupo
-                print(id_grupo[:3])
-            elif id_cat >= 10 and  id_cat <= 99:
-                id_grupo = '0'+ id_grupo
-                print(id_grupo[:3])
-        print(id_grupo[:3])        
+        }       
         return render(request,'administracion/agregar_producto.html', data)
     return redirect('home')
 
@@ -336,3 +335,15 @@ def categoria_subCategoria(request):
 
 def addVehiculo():
     pass
+
+def registroProducto(sku,nombre,descripcion,precioC,precioV,stock,stock_cr,categoria,medida,rut_pr,fecha):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    print(sku,nombre,descripcion,precioC,precioV,stock,stock_cr,categoria,fecha,medida,rut_pr)
+    cursor.callproc('SP_AGREGAR_PRODUCTO',[sku,nombre,descripcion,precioC,precioV,stock,stock_cr,categoria,fecha,medida,rut_pr, salida])
+
+    return salida.getvalue()
+    #0011910010000000043 nehumatico liso good year se especializa en nehumaticos de alta calidad de competicion 123000 130000 300 30 43 00000000 unidad 19142851k
+    #0011910010000000043 nehumatico liso good year se especializa en nehumaticos de alta calidad de competicion 130000 135000 300 30 1 00000000 unidad 19142851-k
+    #0011910010000000043 nehumatico liso good year se especializa en nehumaticos de alta calidad de competicion 130000 135000 300 20 1 00000000 unidad 19142851k

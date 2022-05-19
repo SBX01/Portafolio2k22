@@ -74,7 +74,7 @@ CREATE TABLE detalle_servicio (
     id_detalle_servicio NUMBER(9) NOT NULL,
     cantidad            NUMBER(2) NOT NULL,
     servicio_id_sevicio NUMBER(9) NOT NULL,
-    producto_sku        NUMBER(9) NOT NULL
+    producto_sku        VARCHAR2(20) NOT NULL
 );
 
 ALTER TABLE detalle_servicio
@@ -112,7 +112,7 @@ ALTER TABLE empleado ADD CONSTRAINT empleado_pk PRIMARY KEY ( rut_emp );
 
 CREATE TABLE grupo_producto (
     id_categoria     NUMBER(9) NOT NULL,
-    nombre           VARCHAR2(25) NOT NULL,
+    nombre           VARCHAR2(25 BYTE) NOT NULL,
     tipo_producto_id NUMBER(9) NOT NULL
 );
 
@@ -138,7 +138,7 @@ CREATE TABLE orden_pedido_producto (
 ALTER TABLE orden_pedido_producto ADD CONSTRAINT orden_pedido_producto_pk PRIMARY KEY ( folio_pedido );
 
 CREATE TABLE "ORDEN-PRODUCTO" (
-    sku_fk          NUMBER(9) NOT NULL,
+    sku_fk          VARCHAR2(20) NOT NULL,
     folio_pedido_fk NUMBER(9) NOT NULL
 );
 
@@ -146,7 +146,7 @@ ALTER TABLE "ORDEN-PRODUCTO" ADD CONSTRAINT relation_19_pk PRIMARY KEY ( sku_fk,
                                                                          folio_pedido_fk );
 
 CREATE TABLE producto (
-    sku               NUMBER(9) NOT NULL,
+    sku               VARCHAR2(20) NOT NULL,
     nombre_corto      VARCHAR2(30) NOT NULL,
     descripcion       VARCHAR2(200) NOT NULL,
     precio_compra     NUMBER(9) NOT NULL,
@@ -171,7 +171,7 @@ ALTER TABLE proveedor ADD CONSTRAINT proveedor_pk PRIMARY KEY ( rut_proveedor );
 
 CREATE TABLE "PROV-PRODUCTO" (
     rut_proveedor VARCHAR2(10) NOT NULL,
-    sku           NUMBER(9) NOT NULL
+    sku           VARCHAR2(20) NOT NULL
 );
 
 ALTER TABLE "PROV-PRODUCTO" ADD CONSTRAINT relation_5_pk PRIMARY KEY ( rut_proveedor,
