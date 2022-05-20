@@ -44,6 +44,8 @@
 									  <a href="{% url 'logout'%}"> Cerrar sesion </a>
 									  {% if user.is_staff %}
 									  <a href="{% url 'Administracion'%}"> Administracion </a>
+									  {% else %}
+									  <a href="{% url 'clientes'%}"> Servicio de reservas </a>
 									  {% endif %}
 								  </div>
 							  </div>

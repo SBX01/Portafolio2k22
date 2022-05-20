@@ -344,6 +344,3 @@ def registroProducto(sku,nombre,descripcion,precioC,precioV,stock,stock_cr,categ
     cursor.callproc('SP_AGREGAR_PRODUCTO',[sku,nombre,descripcion,precioC,precioV,stock,stock_cr,categoria,fecha,medida,rut_pr, salida])
 
     return salida.getvalue()
-    #0011910010000000043 nehumatico liso good year se especializa en nehumaticos de alta calidad de competicion 123000 130000 300 30 43 00000000 unidad 19142851k
-    #0011910010000000043 nehumatico liso good year se especializa en nehumaticos de alta calidad de competicion 130000 135000 300 30 1 00000000 unidad 19142851-k
-    #0011910010000000043 nehumatico liso good year se especializa en nehumaticos de alta calidad de competicion 130000 135000 300 20 1 00000000 unidad 19142851k

@@ -27,18 +27,16 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/admin">Administracion serviexpress</a>
+        <a class="navbar-brand" href="/clientes">Serviexpress</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{% url 'Administracion' %}">Home</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Servicios
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{% url 'registro_servicio' %}">Registrar servicios</a></li>
-		        <li><a href="{% url 'registro_empleado'%}">Registrar Empleados</a></li>
-            <li><a href="{% url 'agregar_producto'%}">Registrar Productos</a></li>
-            <li><a href="{% url 'registro_Proveedor'%}">Registrar Proveedor</a></li>
+            <li><a href="#">Registrar reserva</a></li>
+            <li><a href="{%url 'registro_vehiculo' %}">Registrar vehiculo</a></li>
+            <li><a href="#">Ver reservas</a></li>
           </ul>
         </li>
         <li><a href="{% url 'home' %}">Ver sitio web</a></li>

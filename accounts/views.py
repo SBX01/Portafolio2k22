@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm
-from .models import Account
+from .models import Account, Roles
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
@@ -30,9 +30,8 @@ def register(request):
             razon = form.cleaned_data['razon_social']
             password = form.cleaned_data['password']
             username = email.split("@")[0]
-            user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
+            user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email,role='client', username=username, password=password)
             user.phone_number = phone_number
-            
             user.save()
 
             pasw = make_password(password)
@@ -42,7 +41,7 @@ def register(request):
             
             #manda link de activacion de cuenta al correo
             current_site = get_current_site(request)
-            mail_subject = 'por favor activa tu cuenta en NOMBRE DEL TALLER'
+            mail_subject = 'por favor activa tu cuenta de SERVIEXPRESS'
             body = render_to_string('accounts/account_verification_email.html', {
                 'user' : user,
                 'domain' : current_site,

@@ -76,6 +76,9 @@ class Cliente(models.Model):
         managed = False
         db_table = 'cliente'
 
+    def __str__(self):
+        return str(self.rut_cli)
+
 
 class Cotizacion(models.Model):
     numero_folio = models.IntegerField(primary_key=True)
@@ -335,8 +338,8 @@ class Vehiculo(models.Model):
     marca = models.CharField(max_length=30)
     modelo = models.CharField(max_length=30)
     anio = models.IntegerField()
-    activo = models.FloatField()
-    cliente_rut_cli = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_rut_cli')
+    activo = models.BooleanField()
+    cliente_rut_cli = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='rut_cli')
 
     class Meta:
         managed = False

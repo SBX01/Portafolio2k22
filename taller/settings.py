@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'administracion',
     'tempus_dominus', 
+    'clientes'
 ]
 
 MIDDLEWARE = [
