@@ -280,9 +280,10 @@ class Proveedor(models.Model):
 
 class Reserva(models.Model):
     id = models.IntegerField(primary_key=True)
-    fecha = models.DateField()
+    fecha = models.DateTimeField()
     estado = models.FloatField()
     cliente_rut_cli = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_rut_cli')
+    comentario = models.CharField(max_length=350)
 
     class Meta:
         managed = False

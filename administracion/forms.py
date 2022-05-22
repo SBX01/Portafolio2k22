@@ -6,7 +6,7 @@ from .models import Empleado, Producto, Proveedor, Servicio, TipoEmpleado
 
 import datetime
 
-#dick
+#dic
 UnidadMedida=(
     ('unidad','c/u'),
     ('centimetro cubico','cc'),

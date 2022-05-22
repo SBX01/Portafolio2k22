@@ -177,11 +177,18 @@ def registrar_usario(request):
     
     return redirect('home')
     
-def mensajes(request,salida):
+def mensajes(request,salida,mensajeEnvio=None):
     if salida == 1:
-        messages.success(request, 'El proceso se finalizó correctamente.')
+        if mensajeEnvio is None:
+
+            messages.success(request, 'El proceso se finalizó correctamente.')
+        else:
+             messages.success(request, mensajeEnvio)
     else:
-        messages.error(request, 'Houston tenemos problemas.' )
+        if mensajeEnvio is None:
+            messages.error(request, 'Houston tenemos problemas.' )
+        else:
+            messages.error(request, mensajeEnvio)
 
 def add_tipo_empleado(seccion):
     django_cursor = connection.cursor()
