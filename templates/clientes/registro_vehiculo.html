@@ -38,4 +38,43 @@
         </article>
     </div>
 </div>
+<div class="col-sm-6">
+        <h2> Vehiculos registrados</h2>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Patente</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Año</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in listaVehiculos %}
+                <tr>
+                   
+                    <td>{{r.pantente}}</td>
+                    <td>{{r.marca}}</td>
+                    <td>{{r.modelo}}</td>
+                    <td>{{r.anio}}</td>
+
+                    <td>
+                        <button type="button" class="btn btn-danger">
+                            <a style="text-decoration:none; color:white" href="">
+                            Eliminar
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning">
+                            <a style="text-decoration:none; color:white" href="">
+                            Editar
+                        </button>
+                    </td>
+                       
+                </tr>
+                {%endfor%} 
+            </tbody>
+        </table>
+        
+
 {%endblock%}

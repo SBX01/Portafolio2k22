@@ -248,7 +248,7 @@ class Producto(models.Model):
     precio_venta = models.IntegerField()
     stock = models.IntegerField()
     stock_critico = models.IntegerField()
-    enuso = models.FloatField()
+    enuso = models.BooleanField()
     id_categoria = models.ForeignKey(GrupoProducto, models.DO_NOTHING, db_column='id_categoria')
     fecha_vencimiento = models.DateField(blank=True, null=True)
     unidad_medida = models.CharField(max_length=50)
@@ -340,7 +340,7 @@ class Vehiculo(models.Model):
     modelo = models.CharField(max_length=30)
     anio = models.IntegerField()
     activo = models.BooleanField()
-    cliente_rut_cli = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='rut_cli')
+    cliente_rut_cli = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_rut_cli')
 
     class Meta:
         managed = False
