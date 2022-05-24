@@ -1,7 +1,4 @@
 --------------------------------------------------------
--- Archivo creado  - jueves-mayo-12-2022   
---------------------------------------------------------
---------------------------------------------------------
 --  DDL for Sequence COTIZACION_SEQ
 --------------------------------------------------------
 
@@ -20,7 +17,7 @@
 --  DDL for Sequence GRUPO_PRODUCTO_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "GRUPO_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL
+   CREATE SEQUENCE  "GRUPO_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL
 --------------------------------------------------------
 --  DDL for Sequence MEDIO_PAGO_SEQ
 --------------------------------------------------------
@@ -40,17 +37,17 @@
 --  DDL for Sequence SEQ_ERROR
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "SEQ_ERROR"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL
+   CREATE SEQUENCE  "SEQ_ERROR"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 101 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL
 --------------------------------------------------------
 --  DDL for Sequence SEQ_IDSERVICIO
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "SEQ_IDSERVICIO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL
+   CREATE SEQUENCE  "SEQ_IDSERVICIO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL
 --------------------------------------------------------
 --  DDL for Sequence SEQ_TIPO_EMP
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "SEQ_TIPO_EMP"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 15 NOCACHE  ORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL
+   CREATE SEQUENCE  "SEQ_TIPO_EMP"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 16 NOCACHE  ORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL
 --------------------------------------------------------
 --  DDL for Sequence SERVICIO_SEQ
 --------------------------------------------------------
@@ -70,7 +67,7 @@
 --  DDL for Sequence TIPO_PRODUCTO_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "TIPO_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL
+   CREATE SEQUENCE  "TIPO_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL
 --------------------------------------------------------
 --  DDL for Trigger COTIZACION_TRG
 --------------------------------------------------------
@@ -86,22 +83,20 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
 ALTER TRIGGER "COTIZACION_TRG" ENABLE
 --------------------------------------------------------
 --  DDL for Trigger DETALLE_SERVICIO_TRG
 --------------------------------------------------------
 
   CREATE OR REPLACE NONEDITIONABLE TRIGGER "DETALLE_SERVICIO_TRG" 
-BEFORE INSERT ON DETALLE_SERVICIO 
+BEFORE INSERT ON C##PY_TALLER.DETALLE_SERVICIO 
 FOR EACH ROW 
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID_DETALLE_SERVICIO IS NULL THEN
-      SELECT DETALLE_SERVICIO_SEQ.NEXTVAL INTO :NEW.ID_DETALLE_SERVICIO FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
+ WHEN (NEW.ID_DETALLE_SERVICIO IS NULL) BEGIN
+:new.id_detalle_servicio := c##py_taller.detalle_servicio_seq.nextval;
+
+end;
+
 ALTER TRIGGER "DETALLE_SERVICIO_TRG" ENABLE
 --------------------------------------------------------
 --  DDL for Trigger DOCUMENTO_TRG
@@ -118,39 +113,21 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
 ALTER TRIGGER "DOCUMENTO_TRG" ENABLE
 --------------------------------------------------------
 --  DDL for Trigger GRUPO_PRODUCTO_TRG
 --------------------------------------------------------
 
   CREATE OR REPLACE NONEDITIONABLE TRIGGER "GRUPO_PRODUCTO_TRG" 
-BEFORE INSERT ON GRUPO_PRODUCTO 
+BEFORE INSERT ON C##PY_TALLER.GRUPO_PRODUCTO 
 FOR EACH ROW 
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID_CATEGORIA IS NULL THEN
-      SELECT GRUPO_PRODUCTO_SEQ.NEXTVAL INTO :NEW.ID_CATEGORIA FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-ALTER TRIGGER "GRUPO_PRODUCTO_TRG" ENABLE
---------------------------------------------------------
---  DDL for Trigger LOG_ERROR_TRG
---------------------------------------------------------
+ WHEN (NEW.ID_CATEGORIA IS NULL) BEGIN
+:new.id_categoria := c##py_taller.grupo_producto_seq.nextval;
 
-  CREATE OR REPLACE NONEDITIONABLE TRIGGER "LOG_ERROR_TRG" 
-BEFORE INSERT ON LOG_ERROR 
-FOR EACH ROW 
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID_ERROR IS NULL THEN
-      SELECT SEQ_ERROR.NEXTVAL INTO :NEW.ID_ERROR FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-ALTER TRIGGER "LOG_ERROR_TRG" ENABLE
+end;
+
+ALTER TRIGGER "GRUPO_PRODUCTO_TRG" ENABLE
 --------------------------------------------------------
 --  DDL for Trigger MEDIO_PAGO_TRG
 --------------------------------------------------------
@@ -166,22 +143,20 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
 ALTER TRIGGER "MEDIO_PAGO_TRG" ENABLE
 --------------------------------------------------------
 --  DDL for Trigger ORDEN_PEDIDO_PRODUCTO_TRG
 --------------------------------------------------------
 
   CREATE OR REPLACE NONEDITIONABLE TRIGGER "ORDEN_PEDIDO_PRODUCTO_TRG" 
-BEFORE INSERT ON ORDEN_PEDIDO_PRODUCTO 
+BEFORE INSERT ON C##PY_TALLER.ORDEN_PEDIDO_PRODUCTO 
 FOR EACH ROW 
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.FOLIO_PEDIDO IS NULL THEN
-      SELECT ORDEN_PEDIDO_PRODUCTO_SEQ.NEXTVAL INTO :NEW.FOLIO_PEDIDO FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
+ WHEN (NEW.FOLIO_PEDIDO IS NULL) BEGIN
+:new.folio_pedido := c##py_taller.orden_pedido_producto_seq.nextval;
+
+end;
+
 ALTER TRIGGER "ORDEN_PEDIDO_PRODUCTO_TRG" ENABLE
 --------------------------------------------------------
 --  DDL for Trigger RESERVA_TRG
@@ -214,6 +189,7 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
 ALTER TRIGGER "SERVICIO_TRG" ENABLE
 --------------------------------------------------------
 --  DDL for Trigger TIPO_DOCUMENTO_TRG
@@ -230,6 +206,7 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
 ALTER TRIGGER "TIPO_DOCUMENTO_TRG" ENABLE
 --------------------------------------------------------
 --  DDL for Trigger TIPO_EMPLEADO_TRG
@@ -246,6 +223,7 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
 ALTER TRIGGER "TIPO_EMPLEADO_TRG" ENABLE
 --------------------------------------------------------
 --  DDL for Trigger TIPO_PRODUCTO_TRG
@@ -262,6 +240,7 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
 ALTER TRIGGER "TIPO_PRODUCTO_TRG" ENABLE
 --------------------------------------------------------
 --  DDL for Procedure SP_AGREGAR_CLIENTE
@@ -338,6 +317,54 @@ exception
         RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido');
 end;
 --------------------------------------------------------
+--  DDL for Procedure SP_AGREGAR_PRODUCTO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SP_AGREGAR_PRODUCTO" (
+V_SKU IN PRODUCTO.SKU%TYPE, 
+V_NOMBRE IN producto.nombre_corto%type, 
+V_DESCRIPCION IN PRODUCTO.DESCRIPCION%TYPE,
+V_PRECIOC IN producto.precio_compra%TYPE,
+V_PRECIOV IN producto.precio_venta%TYPE,
+V_STOCK IN producto.stock%TYPE,
+V_STOCKCR IN producto.stock_critico%TYPE,
+V_ID_CAT IN producto.id_categoria%TYPE,
+V_FECHA IN varchar2,
+V_MEDIDA in varchar2,
+V_RUTPROV IN PROVEEDOR.RUT_PROVEEDOR%TYPE,
+v_salida out number
+) IS
+BEGIN
+	IF v_fecha = '00000000' THEN
+		INSERT INTO PRODUCTO VALUES(
+  V_SKU,V_NOMBRE,V_DESCRIPCION,
+  V_PRECIOC,V_PRECIOV ,V_STOCK,
+  V_STOCKCR,1,V_ID_CAT,
+  null,V_MEDIDA);
+  else
+  INSERT INTO PRODUCTO VALUES(
+  V_SKU,V_NOMBRE,V_DESCRIPCION,
+  V_PRECIOC,V_PRECIOV ,V_STOCK,
+  V_STOCKCR,1,V_ID_CAT,
+  v_fecha,V_MEDIDA);
+	END IF;
+    
+  
+  
+  COMMIT;
+  
+  INSERT INTO "PROV-PRODUCTO" VALUES(V_RUTPROV,V_SKU);
+  COMMIT;
+  V_SALIDA:= 1;
+  exception
+    when DUP_VAL_ON_INDEX THEN
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error de dato duplicado');
+    WHEN OTHERS THEN 
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido:'+ SQLERRM);
+END SP_AGREGAR_PRODUCTO;
+--------------------------------------------------------
 --  DDL for Procedure SP_AGREGAR_SERVICIO
 --------------------------------------------------------
 set define off;
@@ -370,7 +397,7 @@ END SP_AGREGAR_SERVICIO;
 --------------------------------------------------------
 set define off;
 
-  CREATE OR REPLACE EDITIONABLE PROCEDURE "SP_AGREGAR_TRABAJADOR" 
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SP_AGREGAR_TRABAJADOR" 
 (
 V_RUN IN EMPLEADO.RUT_EMP%TYPE, 
 V_NOMBRE IN EMPLEADO.NOMBRE%type, 
@@ -448,6 +475,58 @@ BEGIN
 OPEN REG FOR 
 SELECT id_tipo_emp, seccion FROM tipo_empleado;
 END;
+--------------------------------------------------------
+--  DDL for Procedure SP_REGISTRAR_RESERVA
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SP_REGISTRAR_RESERVA" (
+    v_fecha in VARCHAR2,
+    v_rut_cli in reserva.cliente_rut_cli%type,
+    v_comentario in reserva.comentario%TYPE,
+    v_salida out number
+)
+IS 
+BEGIN
+
+    INSERT INTO RESERVA VALUES(null,TO_TIMESTAMP(v_fecha, 'dd/mm/yy HH24:MI:SS.FF'),1,v_rut_cli,v_comentario);
+    commit;
+     v_salida:=1;
+    exception
+    when DUP_VAL_ON_INDEX THEN
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,'Error de dato duplicado');
+        v_salida:=0;
+    WHEN OTHERS THEN 
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,SQLERRM);
+        
+END SP_REGISTRAR_RESERVA;
+--------------------------------------------------------
+--  DDL for Procedure SP_REGISTRO_VEHICULO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SP_REGISTRO_VEHICULO" (
+V_PATENTE IN VEHICULO.PANTENTE%TYPE,
+V_MARCA IN VEHICULO.MARCA%TYPE,
+V_MODELO IN VEHICULO.MODELO%TYPE,
+V_ANIO IN VEHICULO.ANIO%TYPE,
+V_RUT IN VEHICULO.CLIENTE_RUT_CLI%TYPE,
+V_SALIDA OUT NUMBER
+)
+IS
+BEGIN
+  INSERT INTO VEHICULO VALUES (V_PATENTE,V_MARCA,V_MODELO,V_ANIO,1,V_RUT);
+  COMMIT;
+v_salida :=1;
+exception
+    when DUP_VAL_ON_INDEX THEN
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error de dato duplicado');
+    WHEN OTHERS THEN 
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido');
+END SP_REGISTRO_VEHICULO;
 --------------------------------------------------------
 --  DDL for Procedure SP_TIPO_EMPLEADO
 --------------------------------------------------------
