@@ -288,7 +288,7 @@ def addProducto(request):
                     elif id_cat >= 10 and  id_cat <= 99:
                         id_grupo = '0'+ id_grupo
                 id_producto = id_producto + id_grupo[:3]
-                print('esta es la fecha: '+ fecha.strftime("%m/%d/%Y"))
+                #print('esta es la fecha: '+ fecha.strftime("%m/%d/%Y"))
                 if fecha is None:
                     fecha = '00000000'
                 else:

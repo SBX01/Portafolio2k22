@@ -115,7 +115,7 @@
                         <td>{{e.nombre}} {{e.apellidos}}</td>
                         <td>{{e.id_tipo_emp}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger" id="eliminar">
                                 <a style="text-decoration:none; color:white" href="{% url 'eliminarempleado' e.rut_emp %}">
                                 Eliminar
                             </button>
@@ -140,11 +140,21 @@
         
     </div>
 </div>
-
+<script>
+    $('#eliminar').click(function(){
+        return confirm("¿Estás seguro de eliminar al empleado seleccionado?"); 
+    
+    });
+</script>   
 
 {% endblock %}
 {% block scripts %}
 <script>
+    $('#eliminar').click(function(){
+        return confirm("¿Estás seguro de eliminar al empleado seleccionado?"); 
+    
+    });
+    
     function checkRut(rut) {
         // Despejar Puntos
         var valor = rut.value.replace('.','');

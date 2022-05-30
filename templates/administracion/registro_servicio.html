@@ -1,11 +1,14 @@
 {% extends 'administracion\adminHome.html' %} {% block content %}
-<h1>Registro de servicios</h1>
-<br>
-<p>Hola usuario {{user.first_name}}</p>
-<br><br><br>
+
 
 <div class="container row">
+
+    <h1>Registro de servicios</h1>
+    <br>
+    <p>Hola usuario {{user.first_name}}</p>
+    <br><br><br>
     <div class="col-sm-6">
+
         <h4>Agregar Servicio</h4>
     {% include 'includes/alerts.html'%}
     <form name="formulario" action="{% url 'registro_servicio' %}" method="post">
@@ -42,13 +45,13 @@
                     <td>{{s.nombre}}</td>
                     <td>{{s.precio}}</td>
                     <td>
-                        <button type="button" class="btn btn-danger">
+                        <button type="button" class="btn btn-danger" id="eliminar">
                             <a style="text-decoration:none; color:white" href="{% url 'eliminar_servicio' s.id_sevicio%}">
                             Eliminar
                         </button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-warning">
+                        <button type="button" class="btn btn-warning" >
                             <a style="text-decoration:none; color:white" href="{% url 'editar_servicio' s.id_sevicio%}">
                             Editar
                         </button>
@@ -65,6 +68,10 @@
 </div>
 <!-- === ALERTAS === -->
 <script>
-    $('.alert').alert()
+    $('#eliminar').click(function(){
+        return confirm("¿Estás seguro de eliminar el servicio?"); 
+
+})
+
 </script>
 <a href="{% url 'Administracion' %}">Volver</a> {% endblock %}
