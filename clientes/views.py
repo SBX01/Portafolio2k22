@@ -5,7 +5,8 @@ from administracion.models import Cliente, Producto, Reserva, Vehiculo
 from django.contrib.auth.decorators import login_required
 from .forms import RegistroReserva, RegistroVehiculo
 import cx_Oracle
-import datetime
+from datetime import datetime
+import time
 from clientes.forms import RegistroVehiculo
 
 # Create your views here.
@@ -129,3 +130,45 @@ def RealizarPedido(request):
         'listaProductos':insumos,
     }
     return render(request,'clientes/add_pedido.html',data)
+
+def cancelarReserva(request,idReserva):
+    eliminar = Reserva.objects.get(id=idReserva)
+    eliminar.estado = 0
+    eliminar.save()
+    return redirect('lista_reserva')
+
+def modificarReserva(request,idReserva):
+    serv = Reserva.objects.get(id=idReserva)
+    if request.method == 'POST':
+        form = RegistroReserva(request.POST,instance=serv)
+        if form.is_valid():
+            diaReserva = form.cleaned_data['fecha'].strftime('%Y-%m-%d')
+            comentario = form.cleaned_data['comentario']
+            horaReserva = request.POST.get('hora','')
+            fechaReservada = diaReserva +' ' + horaReserva+'+00:00'
+            fechaSave = diaReserva.replace('-','/') + ' ' + horaReserva
+
+            if Reserva.objects.filter(fecha = fechaReservada).exists():
+                mensajes(request,0,'Hora reservada, por favor escoja otra.')
+            else: 
+                diaReserva = form.cleaned_data['fecha'].strftime('%d-%m-%y')
+                fechaSave = diaReserva.replace('-','/') + ' ' + horaReserva
+                print(fechaSave)
+                salida = update_reserva(fechaSave,comentario,serv.id)                      
+                mensajes(request,1)
+                return redirect('lista_reserva')
+           
+            return redirect('lista_reserva')
+    else:
+        form = RegistroReserva(instance=serv)
+    context = {'form' : form,'serv':serv}
+    return render(request,'clientes/modificar_reserva.html',context)
+
+
+
+def update_reserva(fecha,comentario,idReserva):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('SP_EDITAR_RESERVA',[fecha,comentario,idReserva,salida])
+    return salida.getvalue()

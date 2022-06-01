@@ -18,15 +18,15 @@
                     <td>{{r.fecha}}</td>
                     <td>{{r.comentario}}</td>
                     <td>
-                        <button type="button" class="btn btn-danger">
-                            <a style="text-decoration:none; color:white" href="">
-                            Eliminar
+                        <button type="button" class="btn btn-danger" id="eliminar">
+                            <a style="text-decoration:none; color:white" href="{% url 'eliminar_reserva' r.id %}">
+                            Cancelar
                         </button>
                     </td>
                     <td>
                         <button type="button" class="btn btn-warning">
-                            <a style="text-decoration:none; color:white" href="">
-                            Editar
+                            <a style="text-decoration:none; color:white" href="{% url 'modificar_reserva' r.id %}">
+                            Modificar
                         </button>
                     </td>
                        
@@ -36,4 +36,10 @@
         </table>
         
 <div>
+<script>
+    $('#eliminar').click(function(){
+        return confirm("¿Estás seguro de cancelar la reserva seleccionada?"); 
+    
+    });
+</script>
 {% endblock %}

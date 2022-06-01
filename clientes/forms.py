@@ -44,8 +44,10 @@ class RegistroVehiculo(forms.ModelForm):
 
 class RegistroReserva(forms.ModelForm):
 
-    date_now = datetime.date.today()
+    date_now = datetime.date.today() + datetime.timedelta(days=1)
     years_to_add = date_now.year + 1
+
+
     fechaDeHoy = date_now.strftime('%Y-%m-%d')
     date_max = date_now.replace(year=years_to_add).strftime('%Y-%m-%d')
     fecha = forms.DateField(widget=DateTimeInput(attrs={'min':fechaDeHoy,'max':date_max,'onclick':'weekends()'}), required=True )
