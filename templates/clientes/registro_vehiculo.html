@@ -59,14 +59,14 @@
                     <td>{{r.anio}}</td>
 
                     <td>
-                        <button type="button" class="btn btn-danger">
-                            <a style="text-decoration:none; color:white" href="">
+                        <button type="button" class="btn btn-danger" id="eliminar">
+                            <a style="text-decoration:none; color:white" href="{% url 'eliminar_vehiculo' r.pantente %}">
                             Eliminar
                         </button>
                     </td>
                     <td>
                         <button type="button" class="btn btn-warning">
-                            <a style="text-decoration:none; color:white" href="">
+                            <a style="text-decoration:none; color:white" href="{% url 'modificar_vehiculo' r.pantente %}">
                             Editar
                         </button>
                     </td>
@@ -76,5 +76,10 @@
             </tbody>
         </table>
         
-
+<script>
+    $('#eliminar').click(function(){
+        return confirm("¿Estás seguro de eliminar el vehiculo seleccionado?"); 
+    
+    });
+</script>
 {%endblock%}

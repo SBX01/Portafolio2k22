@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from administracion.views import mensajes
 from administracion.models import Cliente, Producto, Reserva, Vehiculo
 from django.contrib.auth.decorators import login_required
-from .forms import RegistroReserva, RegistroVehiculo
+from .forms import ActualizarVehiculo, RegistroReserva, RegistroVehiculo
 import cx_Oracle
 from datetime import datetime
 import time
@@ -172,3 +172,24 @@ def update_reserva(fecha,comentario,idReserva):
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('SP_EDITAR_RESERVA',[fecha,comentario,idReserva,salida])
     return salida.getvalue()
+
+def modificarVehiculo(request,patente):
+    up_auto = Vehiculo.objects.get(pantente=patente)
+    if request.method == 'POST':
+        form = ActualizarVehiculo(request.POST,instance=up_auto)
+        if form.is_valid():
+            marca = form.cleaned_data['marca']
+            modelo = form.cleaned_data['modelo']
+            anio = form.cleaned_data['anio']
+            form.save()
+            return redirect('registro_vehiculo')
+    else:
+        form = ActualizarVehiculo(instance=up_auto)
+    context = {'form' : form,'auto':up_auto}
+    return render(request,'clientes/modificar_vehiculo.html',context)
+
+def eliminarVehiculo(request,patente):
+    eliminar = Vehiculo.objects.get(pantente=patente)
+    eliminar.activo = 0
+    eliminar.save()
+    return redirect('registro_vehiculo')

@@ -19,6 +19,26 @@ HORAS_ATENCION = (
 
 )
 
+class ActualizarVehiculo(forms.ModelForm):
+    class Meta:
+        model = Vehiculo
+        fields = ['marca','modelo','anio']
+
+    def __init__(self, *args, **kwargs ):
+        super(ActualizarVehiculo, self).__init__(*args, **kwargs)
+        self.fields['marca'].widget.attrs['placeholder'] = 'Toyota'
+        self.fields['modelo'].widget.attrs['placeholder'] = 'Corolla'
+        self.fields['anio'].widget.attrs['placeholder'] = '1997'
+
+        
+        
+        for field in self.fields:
+            self.fields[field].widget.attrs['class']='form-control'
+
+    def clean(self):
+        cleaned_data = super(ActualizarVehiculo, self).clean()
+
+
 class DateTimeInput(forms.DateTimeInput):
     input_type = 'date' #'datetime-local' para fecha y hora
 
