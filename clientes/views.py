@@ -42,8 +42,12 @@ def registroVehiculo(request):
             anio = int(form.cleaned_data['anio'])
 
             if Vehiculo.objects.filter(pantente = patente).exists():
-                mensajes(request,0)
-                return redirect ('registro_vehiculo')
+
+                mensajes(request,0,'patente ya se encuentra en los registros')
+            elif not len(patente)== 6 and not len(patente) == 5:
+                mensajes(request,0,'la patente ingresada no es válida')
+
+
             else:
                 salida = add_vehiculo(patente,marca,modelo,anio,rut_cliente)
                 mensajes(request,salida)
