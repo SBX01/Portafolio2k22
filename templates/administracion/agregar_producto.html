@@ -82,7 +82,51 @@
         </article>
     </div>
 </div>
+<div class="col-sm-6">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio de compra</th>
+                <th>Precio de venta</th>
+                <th>Stock disponible</th>
+                <th>nivel bajo de stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in productos %}
+            <tr>
+               
+                <td>{{s.nombre_corto}}</td>
+                <td>{{s.precio_compra}}</td>
+                <td>{{s.precio_venta}}</td>
+                <td>{{s.stock}}</td>
+                <td>{{s.stock_critico}}</td>
+                <td>
+                    <button type="button" class="btn btn-danger">
+                        <a style="text-decoration:none; color:white" href="{% url 'eliminar_producto' s.sku %}">
+                        Eliminar
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning" >
+                        <a style="text-decoration:none; color:white" href="">
+                        Editar
+                    </button>
+                </td>
+                   
+            </tr>
+            {%endfor%} 
+        </tbody>
+    </table>
+</div>
+<script>
+    $('.btn-danger').click(function(){
+        return confirm("¿Estás seguro de eliminar el producto?"); 
 
+})
+
+</script>
 <script>
     function sub_proceso(){
         let id_cat = document.getElementById("categorias").value;

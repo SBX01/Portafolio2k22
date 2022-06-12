@@ -11,6 +11,7 @@ urlpatterns = [
     path('eliminar_servicio/<int:idServ>/', views.eliminarServicio, name='eliminar_servicio'),
     path('editar_servicio/<int:idServ>/', views.editarServicio, name='editar_servicio'),
     path('editar_empleado/<str:rut>/', views.editarEmpleado, name='editar_empleado'),
+    path('eliminar_producto/<str:idprod>/', views.eliminarProducto, name='eliminar_producto'),
     path('registrar_producto/', views.addProducto, name='agregar_producto'),
     path('categoria/', views.categoria_subCategoria, name='sub_categoria'),
 ]

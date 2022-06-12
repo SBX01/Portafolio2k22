@@ -253,6 +253,7 @@ def registrarProveedor(request):
     return redirect('home')
 
 def eliminarEmp(request,rut_empleado):
+
     emp = Empleado.objects.get(rut_emp = rut_empleado)
     emp.activo = 0
     emp.save()
@@ -324,7 +325,8 @@ def addProducto(request):
             'form': form,   
             'categorias': GrupoProducto.objects.all(),
             'supliers': Proveedor.objects.all(),
-            'tipos': TipoProducto.objects.all()
+            'tipos': TipoProducto.objects.all(),
+            'productos': Producto.objects.filter(enuso = 1)
         }       
         return render(request,'administracion/agregar_producto.html', data)
     return redirect('home')
@@ -340,9 +342,6 @@ def categoria_subCategoria(request):
     return render(request,'administracion/sub_categoria.html', context)
 
 
-def addVehiculo():
-    pass
-
 def registroProducto(sku,nombre,descripcion,precioC,precioV,stock,stock_cr,categoria,medida,rut_pr,fecha):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -351,3 +350,9 @@ def registroProducto(sku,nombre,descripcion,precioC,precioV,stock,stock_cr,categ
     cursor.callproc('SP_AGREGAR_PRODUCTO',[sku,nombre,descripcion,precioC,precioV,stock,stock_cr,categoria,fecha,medida,rut_pr, salida])
 
     return salida.getvalue()
+
+def eliminarProducto(request,idprod):
+    pr = Producto.objects.get(sku = idprod)
+    pr.enuso = 0
+    pr.save()
+    return redirect('agregar_producto')
