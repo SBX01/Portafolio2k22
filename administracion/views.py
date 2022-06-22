@@ -9,7 +9,7 @@ import django
 from django.shortcuts import redirect, render
 from .models import Empleado, GrupoProducto, Producto, Proveedor, Servicio, TipoEmpleado, TipoProducto
 from accounts.models import Roles, Account
-from .forms import AddProducto, RegistroServicio, TipoEmp, RegistroEmp ,RegistroProveedor, UpdateEmp
+from .forms import AddProducto, EditarProducto, RegistroServicio, TipoEmp, RegistroEmp ,RegistroProveedor, UpdateEmp
 from django.db import connection
 from django.contrib.auth.hashers import make_password
 import cx_Oracle
@@ -356,3 +356,25 @@ def eliminarProducto(request,idprod):
     pr.enuso = 0
     pr.save()
     return redirect('agregar_producto')
+
+def modificarProducto(request,idpro):
+    pr = Producto.objects.get(sku=idpro)
+    print(pr)
+    if request.method == 'POST':
+        form = EditarProducto(request.POST,instance=pr)
+        if form.is_valid():
+
+                pr.precio_compra = form.cleaned_data['precio_compra']
+                pr.precio_venta = form.cleaned_data['precio_venta']
+                pr.stock = form.cleaned_data['stock']
+                pr.stock_critico = form.cleaned_data['stock_critico']
+                pr.save()
+                mensajes(request,1)
+                return redirect('agregar_producto')
+        else:                       
+            mensajes(request,0)
+
+    else:
+        form = EditarProducto(instance=pr)
+    context = {'form' : form,'producto':pr}
+    return render(request,'administracion/editar_producto.html',context)

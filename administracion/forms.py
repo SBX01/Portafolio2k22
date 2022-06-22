@@ -145,3 +145,21 @@ class RegistroProveedor(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super(RegistroProveedor, self).clean()
+
+class EditarProducto(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['precio_compra','precio_venta','stock','stock_critico']
+
+    def __init__(self, *args, **kwargs ):
+        super(EditarProducto, self).__init__(*args, **kwargs)
+        self.fields['precio_compra'].widget.attrs['placeholder'] = '$10000'
+        self.fields['precio_venta'].widget.attrs['placeholder'] = '$12000'
+        self.fields['stock'].widget.attrs['placeholder'] = '100'
+        self.fields['stock_critico'].widget.attrs['placeholder'] = '25'
+
+        for field in self.fields:
+            self.fields[field].widget.attrs['class']='form-control'
+
+    def clean(self):
+        cleaned_data = super(EditarProducto, self).clean()
