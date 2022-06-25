@@ -1,21 +1,26 @@
 --------------------------------------------------------
--- Archivo creado  - jueves-junio-23-2022   
+-- Archivo creado  - viernes-junio-24-2022   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Sequence COTIZACION_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##PY_TALLER"."COTIZACION_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##PY_TALLER"."COTIZACION_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 141 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence DETALLE_SERVICIO_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##PY_TALLER"."DETALLE_SERVICIO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##PY_TALLER"."DETALLE_SERVICIO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence DOCUMENTO_FOLIO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."DOCUMENTO_FOLIO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence DOCUMENTO_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##PY_TALLER"."DOCUMENTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##PY_TALLER"."DOCUMENTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence GRUPO_PRODUCTO_SEQ
 --------------------------------------------------------
@@ -25,22 +30,22 @@
 --  DDL for Sequence MEDIO_PAGO_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##PY_TALLER"."MEDIO_PAGO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##PY_TALLER"."MEDIO_PAGO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence ORDEN_PEDIDO_PRODUCTO_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##PY_TALLER"."ORDEN_PEDIDO_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 201 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##PY_TALLER"."ORDEN_PEDIDO_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 241 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence ORDEN_PRODUCTO_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##PY_TALLER"."ORDEN_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 181 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##PY_TALLER"."ORDEN_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 221 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence RESERVA_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##PY_TALLER"."RESERVA_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##PY_TALLER"."RESERVA_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence SEQ_ERROR
 --------------------------------------------------------
@@ -65,12 +70,12 @@
 --  DDL for Sequence SERVICIO_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##PY_TALLER"."SERVICIO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##PY_TALLER"."SERVICIO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence TIPO_DOCUMENTO_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##PY_TALLER"."TIPO_DOCUMENTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##PY_TALLER"."TIPO_DOCUMENTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence TIPO_EMPLEADO_SEQ
 --------------------------------------------------------
@@ -81,6 +86,375 @@
 --------------------------------------------------------
 
    CREATE SEQUENCE  "C##PY_TALLER"."TIPO_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Index AUTH_GROU_GROUP_ID__0CD325B0_U
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."AUTH_GROU_GROUP_ID__0CD325B0_U" ON "C##PY_TALLER"."AUTH_GROUP_PERMISSIONS" ("GROUP_ID", "PERMISSION_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index AUTH_GROUP_GROUP_ID_B120CBF9
+--------------------------------------------------------
+
+  CREATE INDEX "C##PY_TALLER"."AUTH_GROUP_GROUP_ID_B120CBF9" ON "C##PY_TALLER"."AUTH_GROUP_PERMISSIONS" ("GROUP_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index AUTH_GROUP_PERMISSION_84C5C92E
+--------------------------------------------------------
+
+  CREATE INDEX "C##PY_TALLER"."AUTH_GROUP_PERMISSION_84C5C92E" ON "C##PY_TALLER"."AUTH_GROUP_PERMISSIONS" ("PERMISSION_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index AUTH_PERM_CONTENT_T_01AB375A_U
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."AUTH_PERM_CONTENT_T_01AB375A_U" ON "C##PY_TALLER"."AUTH_PERMISSION" ("CONTENT_TYPE_ID", "CODENAME") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index AUTH_PERMI_CONTENT_TY_2F476E4B
+--------------------------------------------------------
+
+  CREATE INDEX "C##PY_TALLER"."AUTH_PERMI_CONTENT_TY_2F476E4B" ON "C##PY_TALLER"."AUTH_PERMISSION" ("CONTENT_TYPE_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index CLIENTE_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."CLIENTE_PK" ON "C##PY_TALLER"."CLIENTE" ("RUT_CLI") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index COTIZACION_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."COTIZACION_PK" ON "C##PY_TALLER"."COTIZACION" ("NUMERO_FOLIO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index DETALLE_DOCUMENTO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."DETALLE_DOCUMENTO_PK" ON "C##PY_TALLER"."DETALLE_DOCUMENTO" ("SERVICIO_ID_SEVICIO", "DOCUMENTO_ID_DOCUMENTO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index DETALLE_SERVICIO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."DETALLE_SERVICIO_PK" ON "C##PY_TALLER"."DETALLE_SERVICIO" ("PRODUCTO_SKU", "SERVICIO_ID_SEVICIO", "ID_DETALLE_SERVICIO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index DJANGO_ADM_CONTENT_TY_C4BCE8EB
+--------------------------------------------------------
+
+  CREATE INDEX "C##PY_TALLER"."DJANGO_ADM_CONTENT_TY_C4BCE8EB" ON "C##PY_TALLER"."DJANGO_ADMIN_LOG" ("CONTENT_TYPE_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index DJANGO_ADM_USER_ID_C564EBA6
+--------------------------------------------------------
+
+  CREATE INDEX "C##PY_TALLER"."DJANGO_ADM_USER_ID_C564EBA6" ON "C##PY_TALLER"."DJANGO_ADMIN_LOG" ("USER_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index DJANGO_CO_APP_LABEL_76BD3D3B_U
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."DJANGO_CO_APP_LABEL_76BD3D3B_U" ON "C##PY_TALLER"."DJANGO_CONTENT_TYPE" ("APP_LABEL", "MODEL") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index DJANGO_SES_EXPIRE_DAT_A5C62663
+--------------------------------------------------------
+
+  CREATE INDEX "C##PY_TALLER"."DJANGO_SES_EXPIRE_DAT_A5C62663" ON "C##PY_TALLER"."DJANGO_SESSION" ("EXPIRE_DATE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index DOCUMENTO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."DOCUMENTO_PK" ON "C##PY_TALLER"."DOCUMENTO" ("ID_DOCUMENTO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index EMPLEADO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."EMPLEADO_PK" ON "C##PY_TALLER"."EMPLEADO" ("RUT_EMP") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index GRUPO_PRODUCTO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."GRUPO_PRODUCTO_PK" ON "C##PY_TALLER"."GRUPO_PRODUCTO" ("ID_CATEGORIA") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index MEDIO_PAGO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."MEDIO_PAGO_PK" ON "C##PY_TALLER"."MEDIO_PAGO" ("ID_PAGO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ORDEN_PEDIDO_PRODUCTO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."ORDEN_PEDIDO_PRODUCTO_PK" ON "C##PY_TALLER"."ORDEN_PEDIDO_PRODUCTO" ("FOLIO_PEDIDO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ORDEN-PRODUCTO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."ORDEN-PRODUCTO_PK" ON "C##PY_TALLER"."ORDEN-PRODUCTO" ("ORDEN_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index PRODUCTO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."PRODUCTO_PK" ON "C##PY_TALLER"."PRODUCTO" ("SKU") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index PROVEEDOR_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."PROVEEDOR_PK" ON "C##PY_TALLER"."PROVEEDOR" ("RUT_PROVEEDOR") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index RELATION_5_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."RELATION_5_PK" ON "C##PY_TALLER"."PROV-PRODUCTO" ("RUT_PROVEEDOR", "SKU") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index RESERVA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."RESERVA_PK" ON "C##PY_TALLER"."RESERVA" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SERVICIO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SERVICIO_PK" ON "C##PY_TALLER"."SERVICIO" ("ID_SEVICIO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C009272
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SYS_C009272" ON "C##PY_TALLER"."DJANGO_MIGRATIONS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C009284
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SYS_C009284" ON "C##PY_TALLER"."ACCOUNTS_ACCOUNT" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C009285
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SYS_C009285" ON "C##PY_TALLER"."ACCOUNTS_ACCOUNT" ("USERNAME") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C009286
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SYS_C009286" ON "C##PY_TALLER"."ACCOUNTS_ACCOUNT" ("EMAIL") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C009309
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SYS_C009309" ON "C##PY_TALLER"."DJANGO_CONTENT_TYPE" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C009316
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SYS_C009316" ON "C##PY_TALLER"."DJANGO_ADMIN_LOG" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C009321
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SYS_C009321" ON "C##PY_TALLER"."AUTH_PERMISSION" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C009323
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SYS_C009323" ON "C##PY_TALLER"."AUTH_GROUP" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C009324
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SYS_C009324" ON "C##PY_TALLER"."AUTH_GROUP" ("NAME") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C009328
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SYS_C009328" ON "C##PY_TALLER"."AUTH_GROUP_PERMISSIONS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C009336
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."SYS_C009336" ON "C##PY_TALLER"."DJANGO_SESSION" ("SESSION_KEY") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index TIPO_DOCUMENTO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."TIPO_DOCUMENTO_PK" ON "C##PY_TALLER"."TIPO_DOCUMENTO" ("ID_TIPO_DOC") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index TIPO_EMPLEADO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."TIPO_EMPLEADO_PK" ON "C##PY_TALLER"."TIPO_EMPLEADO" ("ID_TIPO_EMP") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index TIPO_PRODUCTO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."TIPO_PRODUCTO_PK" ON "C##PY_TALLER"."TIPO_PRODUCTO" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index VEHICULO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PY_TALLER"."VEHICULO_PK" ON "C##PY_TALLER"."VEHICULO" ("PANTENTE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
 --------------------------------------------------------
 --  DDL for Trigger COTIZACION_TRG
 --------------------------------------------------------
@@ -128,6 +502,23 @@ BEGIN
 END;
 /
 ALTER TRIGGER "C##PY_TALLER"."DOCUMENTO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger FOLIO_DOCUMENTO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##PY_TALLER"."FOLIO_DOCUMENTO_TRG" 
+   before insert on "C##PY_TALLER"."DOCUMENTO" 
+   for each row 
+begin  
+   if inserting then 
+      if :NEW."FOLIO" is null then 
+         select DOCUMENTO_FOLIO_SEQ.nextval into :NEW."FOLIO" from dual; 
+      end if; 
+   end if; 
+end;
+
+/
+ALTER TRIGGER "C##PY_TALLER"."FOLIO_DOCUMENTO_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger GRUPO_PRODUCTO_TRG
 --------------------------------------------------------
@@ -323,8 +714,13 @@ set define off;
 v_comentario cotizacion.comentario%TYPE,
 v_reserva cotizacion.reserva_id%TYPE,
 v_servicio cotizacion.id_sevicio%TYPE,
+
 v_sku producto.sku%TYPE,
-v_cantidad producto.sku%TYPE
+v_cantidad producto.sku%TYPE,
+
+v_mail empleado.usermail%TYPE,
+v_tipo_doc tipo_documento.id_tipo_doc%TYPE,
+v_pago medio_pago.id_pago%TYPE
 )
 is 
 begin
@@ -332,12 +728,39 @@ begin
         v_precio servicio.precio%TYPE;
         v_stock producto.stock%TYPE;
         v_stock_nuevo producto.stock%TYPE;
+        v_rut_emp empleado.rut_emp%TYPE;
+        v_rut_cli cliente.rut_cli%TYPE;
+        v_total_product producto.precio_venta%TYPE;
+        v_precio_product producto.precio_venta%TYPE;
+        v_total number;
     begin
+        --sacar el rut del empleado
+        select rut_emp
+        into v_rut_emp
+        from empleado
+        where usermail =v_mail;
+
+        --sacar el rut del cliente
+        select cliente_rut_cli
+        into v_rut_cli
+        from reserva
+        where id = v_reserva;
+
         --sacar el valor del servicio
         select precio
         into v_precio
         from servicio
         where id_sevicio = v_servicio;
+
+        --sacar el valos del producto
+        select precio_venta
+        into v_precio_product
+        from producto
+        where sku = v_sku;
+
+        v_total_product := v_precio_product*v_cantidad;
+
+        v_total := v_total_product + v_precio;
 
         --sacar el stock actual
         select stock
@@ -366,6 +789,15 @@ begin
         --Guardamos el detalle del servicio
         insert into detalle_servicio
         values(detalle_servicio_seq.nextval,v_cantidad,v_servicio,v_sku);
+
+        --guardamos los datos en la tabla documento
+        insert into documento
+        values(documento_seq.nextval,documento_folio_seq.nextval,to_date(sysdate),
+        v_total,0,v_tipo_doc,v_rut_emp,v_rut_cli,v_pago,0);
+
+        --detalle documento
+        insert into detalle_documento
+        values(v_servicio,documento_seq.currval);
 
     end;
 
@@ -601,6 +1033,70 @@ end;
 
 /
 --------------------------------------------------------
+--  DDL for Procedure SP_LISTA_DOCUMENTO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_LISTA_DOCUMENTO" 
+(REG OUT SYS_REFCURSOR,
+
+v_id_detalle detalle_servicio.id_detalle_servicio%TYPE
+)
+IS
+BEGIN
+        OPEN REG FOR 
+        select doc.folio,ddoc.servicio_id_sevicio as servicio_id,doc.fecha_emision,ser.nombre,
+        ser.precio precio_servicio,dser.cantidad,pro.nombre_corto||' '||pro.descripcion producto,
+        pro.precio_venta,
+        doc.total,round(doc.total/1.19,2) as subtotal,round(doc.total/1.19)*0.19 as iva,
+        doc.rut_emp,emp.nombre||' '||emp.apellidos as nombre_empleado,
+        doc.rut_cli,cli.nombre||' '||cli.apellido as nombre_cliente,cli.contacto,cli.usermail
+        from documento doc join detalle_documento ddoc 
+        on(doc.id_documento = ddoc.documento_id_documento)
+        join servicio ser on (ser.id_sevicio = ddoc.servicio_id_sevicio)
+        join cotizacion co on(co.id_sevicio = ser.id_sevicio)
+        join empleado emp on(emp.rut_emp = doc.rut_emp)
+        join cliente cli on (cli.rut_cli = doc.rut_cli)
+        join detalle_servicio dser on (dser.servicio_id_sevicio = ser.id_sevicio)
+        join producto pro on (pro.sku = dser.producto_sku)
+        where dser.id_detalle_servicio =v_id_detalle     
+        ;
+
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_LISTA_DOCUMENTO_TIPO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_LISTA_DOCUMENTO_TIPO" 
+(REG OUT SYS_REFCURSOR)
+IS
+BEGIN
+OPEN REG FOR 
+SELECT id_tipo_doc, nombre 
+FROM tipo_documento;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_LISTA_PAGOS
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_LISTA_PAGOS" 
+(REG OUT SYS_REFCURSOR)
+IS
+BEGIN
+OPEN REG FOR 
+SELECT id_pago, nombre 
+FROM medio_pago
+where enuso = 1;
+END;
+
+/
+--------------------------------------------------------
 --  DDL for Procedure SP_LISTA_PRODUCTOS
 --------------------------------------------------------
 set define off;
@@ -646,6 +1142,35 @@ OPEN REG FOR
 SELECT id_sevicio, nombre 
 FROM servicio
 where enuso = 1;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_LISTA_SERVICIOS_REALIZADOS
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_LISTA_SERVICIOS_REALIZADOS" 
+(REG OUT SYS_REFCURSOR,
+v_mail cliente.usermail%TYPE)
+IS
+BEGIN 
+    declare
+        v_rut cliente.rut_cli%TYPE;
+    begin
+        select rut_cli
+        into v_rut
+        from cliente
+        where usermail = v_mail;
+
+        OPEN REG FOR 
+        select ds.id_detalle_servicio,s.nombre,c.comentario,re.fecha
+        from detalle_servicio ds join servicio s on (ds.servicio_id_sevicio = s.id_sevicio)
+        join cotizacion c on (s.id_sevicio = c.id_sevicio)
+        join reserva re on (re.id = c.reserva_id)
+        where re.cliente_rut_cli = v_rut
+        ;
+    end;
 END;
 
 /
