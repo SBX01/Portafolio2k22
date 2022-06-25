@@ -1,0 +1,105 @@
+{% extends 'administracion\adminHome.html' %}{% block content %}
+<div class="card-body col-sm-6">
+    <div class="card mx-auto " style="max-width:520px; margin-top:40px; ">
+        {% include 'includes/alerts.html'%}
+        <article class="card-body">
+            <header class="mb-4">
+                <h4 class="card-title">Agregar Producto</h4>
+                <h6>Todos los campos marcados con un asterisco son de carácter obligatorio</h6>
+            </header>
+            <form action="{% url 'agregar_producto' %} " method="POST" class="was-validated">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Nombre <span style="color:#ff0000">*</span></label> {{form.nombre_corto}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>descripcion <span style="color:#ff0000">*</span></label> {{form.descripcion}}
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Precio compra <span style="color:#ff0000">*</span></label> {{form.precio_compra}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Precio venta <span style="color:#ff0000">*</span></label> {{form.precio_venta}}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Stock <span style="color:#ff0000">*</span></label> {{form.stock}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Nivel de stock crítico<span style="color:#ff0000">*</span></label> {{form.stock_critico}}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>fecha de vencimiento</label> {{form.date}}
+                    </div>                  
+                    <div class="form-group col-md-6">
+                        <label>Unidad de medida<span style="color:#ff0000">*</span></label> {{form.medida}}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputFile">Categoria<span style="color:#ff0000">*</span></label>
+                        <select class="form-control" onchange="sub_proceso()" name="categorias" id="categorias" required="">
+                            <!--option value="">Seleccione categoria</option-->
+                            <option value="">Seleccione la categoria</option>
+                            {% for pr in tipos %}
+                                <option value="{{pr.id}}">{{pr.nombre}}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputFile">Proveedor del producto<span style="color:#ff0000">*</span></label>
+                        <select class="form-control" name="proveedores" id="proveedores" required="">
+                            <option value="">Seleccione Proveedor</option>
+                            {% for proveedor in supliers %}
+                            <option value="{{proveedor.rut_proveedor}}">{{proveedor.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputFile"> subcategoria<span style="color:#ff0000">*</span></label>
+                    <select class="form-control" name="tipos" id="tipos" required="">
+                        <option value="">Seleccione la sub categoria</option>
+                        
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <button type="submit" class="btn btn-warning btn-block"> Guardar cambios </button>
+                    </div>
+                    <!-- form-group// -->
+                </div>
+            </form>
+        </article>
+    </div>
+</div>
+
+<script>
+    function sub_proceso(){
+        let id_cat = document.getElementById("categorias").value;
+
+        let url = '/administracion/categoria/?categorias=' + id_cat;
+
+        fetch(url)
+            .then(function(result){
+                return result.text();
+            })
+            .then(function(result){
+                document.getElementById("tipos").innerHTML = result;
+            });
+
+        //alert("categoria id : " + id_cat);
+    }
+</script>
+
+{%endblock%}

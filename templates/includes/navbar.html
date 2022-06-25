@@ -50,10 +50,40 @@
 							{% endif %}
 						</div>
 					</div>
+<<<<<<< Updated upstream
 
           {% endif %}
 
 
+=======
+		  
+					{% else %}
+		  
+		  
+					<div class="widget-header">
+								  <small class="title text-muted">Bienvenido {{ user.first_name }}! {{user.role}}</small>
+								  <div>
+									  	<a href="{% url 'logout'%}"> Cerrar sesion </a><span class="dark-transp"> | </span>
+									  	<li class="dropdown">
+											<a class="dropdown-toggle" data-toggle="dropdown" href="#">Servicios
+											<span class="caret"></span></a>
+											<ul class="dropdown-menu">
+												<li><a href="{% url 'registro_reserva'%}">Reservar hora</a></li>
+											</ul>
+										</li>  
+									 
+									 
+									  	{% if user.is_staff %}
+									  	<a href="{% url 'Administracion'%}"> Administracion </a>
+									  	{% endif %}
+									  	{% if user.role == 'worker' %}
+									  	<a href="{% url 'trabajadores'%}"> Servicio de reservas </a>
+									  	{% endif %}
+								  </div>
+							  </div>
+		  
+					{% endif %}
+>>>>>>> Stashed changes
 					<a href="#" class="widget-header pl-3 ml-3">
 						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
 						<span class="badge badge-pill badge-danger notify"></span>

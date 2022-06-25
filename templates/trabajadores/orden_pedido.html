@@ -1,0 +1,49 @@
+{% extends 'trabajadores/home.html' %}
+
+{% block content %}
+<section class="section-content padding-y">
+    <div class="card mx-auto" style="max-width:420px; margin-top:40px;">
+        <article class="card-body">
+            <header class="mb-4"><h4 class="card-title">Solicitar productos</h4></header>
+            <form action="{% url 'orden-pedido' producto.sku %}" method="POST">
+                {%csrf_token%}
+
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label>Nombre producto</label>
+                        <input type="text" id="nombre_producto" name="nombre_producto" class="form-control" value="{{producto.nombre_corto}} {{producto.descripcion}}" readonly="True">
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                        <label>Proveedor</label>
+                        <input type="text" id="proveedor" name="proveedor" class="form-control" value="{{prov.1}}" readonly="True">
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                        <label>Rut</label>
+                        <input type="text" id="rut" name="rut" class="form-control"value="{{prov.0}}" readonly="True">
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                        <label>Correo</label>
+                        <input type="text" id="correo" name="correo" class="form-control"value="{{prov.2}}" readonly="True">
+                    </div> <!-- form-group end.// -->
+
+                </div> <!-- form-row end.// -->
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label>Cantidad</label>
+                        <input type="number" id="cantidad" name="cantidad" class="form-control">
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                        <label>Detalles</label>
+                        <textarea type="text" id="detalle" name="detalle" class="form-control" style="resize: none;"></textarea>
+                    </div> <!-- form-group end.// -->
+                </div> <!-- form-row end.// -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> Realizar pedido  </button>
+                </div> <!-- form-group// -->
+                
+            </form>
+        </article>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,791 @@
+--------------------------------------------------------
+-- Archivo creado  - jueves-junio-23-2022   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Sequence COTIZACION_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."COTIZACION_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence DETALLE_SERVICIO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."DETALLE_SERVICIO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence DOCUMENTO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."DOCUMENTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence GRUPO_PRODUCTO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."GRUPO_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence MEDIO_PAGO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."MEDIO_PAGO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence ORDEN_PEDIDO_PRODUCTO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."ORDEN_PEDIDO_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 201 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence ORDEN_PRODUCTO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."ORDEN_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 181 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence RESERVA_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."RESERVA_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_ERROR
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."SEQ_ERROR"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 5 NOCACHE  ORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_ID_SERVICIO
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."SEQ_ID_SERVICIO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 5 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_IDSERVICIO
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."SEQ_IDSERVICIO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_TIPO_EMP
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."SEQ_TIPO_EMP"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 4 NOCACHE  ORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence SERVICIO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."SERVICIO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence TIPO_DOCUMENTO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."TIPO_DOCUMENTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence TIPO_EMPLEADO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."TIPO_EMPLEADO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence TIPO_PRODUCTO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "C##PY_TALLER"."TIPO_PRODUCTO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Trigger COTIZACION_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "C##PY_TALLER"."COTIZACION_TRG" 
+BEFORE INSERT ON COTIZACION 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.NUMERO_FOLIO IS NULL THEN
+      SELECT COTIZACION_SEQ.NEXTVAL INTO :NEW.NUMERO_FOLIO FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "C##PY_TALLER"."COTIZACION_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger DETALLE_SERVICIO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "C##PY_TALLER"."DETALLE_SERVICIO_TRG" 
+BEFORE INSERT ON C##PY_TALLER.DETALLE_SERVICIO 
+FOR EACH ROW 
+  WHEN (NEW.ID_DETALLE_SERVICIO IS NULL) BEGIN
+:new.id_detalle_servicio := c##py_taller.detalle_servicio_seq.nextval;
+
+end;
+/
+ALTER TRIGGER "C##PY_TALLER"."DETALLE_SERVICIO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger DOCUMENTO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "C##PY_TALLER"."DOCUMENTO_TRG" 
+BEFORE INSERT ON DOCUMENTO 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID_DOCUMENTO IS NULL THEN
+      SELECT DOCUMENTO_SEQ.NEXTVAL INTO :NEW.ID_DOCUMENTO FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "C##PY_TALLER"."DOCUMENTO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger GRUPO_PRODUCTO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "C##PY_TALLER"."GRUPO_PRODUCTO_TRG" 
+BEFORE INSERT ON C##PY_TALLER.GRUPO_PRODUCTO 
+FOR EACH ROW 
+  WHEN (NEW.ID_CATEGORIA IS NULL) BEGIN
+:new.id_categoria := c##py_taller.grupo_producto_seq.nextval;
+
+end;
+/
+ALTER TRIGGER "C##PY_TALLER"."GRUPO_PRODUCTO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger MEDIO_PAGO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "C##PY_TALLER"."MEDIO_PAGO_TRG" 
+BEFORE INSERT ON MEDIO_PAGO 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID_PAGO IS NULL THEN
+      SELECT MEDIO_PAGO_SEQ.NEXTVAL INTO :NEW.ID_PAGO FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "C##PY_TALLER"."MEDIO_PAGO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger ORDEN_PEDIDO_PRODUCTO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "C##PY_TALLER"."ORDEN_PEDIDO_PRODUCTO_TRG" 
+BEFORE INSERT ON C##PY_TALLER.ORDEN_PEDIDO_PRODUCTO 
+FOR EACH ROW 
+  WHEN (NEW.FOLIO_PEDIDO IS NULL) BEGIN
+:new.folio_pedido := c##py_taller.orden_pedido_producto_seq.nextval;
+
+end;
+/
+ALTER TRIGGER "C##PY_TALLER"."ORDEN_PEDIDO_PRODUCTO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger ORDEN_PRODUCTO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##PY_TALLER"."ORDEN_PRODUCTO_TRG" 
+   before insert on "C##PY_TALLER"."ORDEN-PRODUCTO" 
+   for each row 
+begin  
+   if inserting then 
+      if :NEW."ORDEN_ID" is null then 
+         select ORDEN_PRODUCTO_SEQ.nextval into :NEW."ORDEN_ID" from dual; 
+      end if; 
+   end if; 
+end;
+
+/
+ALTER TRIGGER "C##PY_TALLER"."ORDEN_PRODUCTO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger RESERVA_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "C##PY_TALLER"."RESERVA_TRG" 
+BEFORE INSERT ON RESERVA 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT RESERVA_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "C##PY_TALLER"."RESERVA_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger SERVICIO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "C##PY_TALLER"."SERVICIO_TRG" 
+BEFORE INSERT ON SERVICIO 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID_SEVICIO IS NULL THEN
+      SELECT SERVICIO_SEQ.NEXTVAL INTO :NEW.ID_SEVICIO FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "C##PY_TALLER"."SERVICIO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger TIPO_DOCUMENTO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "C##PY_TALLER"."TIPO_DOCUMENTO_TRG" 
+BEFORE INSERT ON TIPO_DOCUMENTO 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID_TIPO_DOC IS NULL THEN
+      SELECT TIPO_DOCUMENTO_SEQ.NEXTVAL INTO :NEW.ID_TIPO_DOC FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "C##PY_TALLER"."TIPO_DOCUMENTO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger TIPO_EMPLEADO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "C##PY_TALLER"."TIPO_EMPLEADO_TRG" 
+BEFORE INSERT ON TIPO_EMPLEADO 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID_TIPO_EMP IS NULL THEN
+      SELECT TIPO_EMPLEADO_SEQ.NEXTVAL INTO :NEW.ID_TIPO_EMP FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "C##PY_TALLER"."TIPO_EMPLEADO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger TIPO_PRODUCTO_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "C##PY_TALLER"."TIPO_PRODUCTO_TRG" 
+BEFORE INSERT ON TIPO_PRODUCTO 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT TIPO_PRODUCTO_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "C##PY_TALLER"."TIPO_PRODUCTO_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Procedure SP_ACTUALIZAR_PEDIDO_PRODUCTO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_ACTUALIZAR_PEDIDO_PRODUCTO" (
+
+v_folio orden_pedido_producto.folio_pedido%TYPE,
+v_cantidad orden_pedido_producto.cantidad%TYPE,
+v_sku producto.sku%TYPE
+
+)
+is
+
+begin
+    declare
+        v_stock number;
+        v_nuevo_stock number;
+    begin
+        select stock
+        into v_stock
+        from producto
+        where sku = v_sku;
+
+        v_nuevo_stock := v_stock + v_cantidad;
+
+        update producto
+        set stock = v_nuevo_stock
+        where sku = v_sku;
+    end;    
+
+    update orden_pedido_producto
+    set fecha_recepcion = sysdate, 
+        recibido = 1
+    where folio_pedido = v_folio; 
+
+    --select sku,stock,40 as cantidad_pedido,stock + 40 as stock_actual
+    --from producto;
+end;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_ADD_COTIZACION
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_ADD_COTIZACION" (
+v_comentario cotizacion.comentario%TYPE,
+v_reserva cotizacion.reserva_id%TYPE,
+v_servicio cotizacion.id_sevicio%TYPE,
+v_sku producto.sku%TYPE,
+v_cantidad producto.sku%TYPE
+)
+is 
+begin
+    declare
+        v_precio servicio.precio%TYPE;
+        v_stock producto.stock%TYPE;
+        v_stock_nuevo producto.stock%TYPE;
+    begin
+        --sacar el valor del servicio
+        select precio
+        into v_precio
+        from servicio
+        where id_sevicio = v_servicio;
+
+        --sacar el stock actual
+        select stock
+        into v_stock
+        from producto
+        where sku = v_sku;
+
+
+        --actualizamos el estado de la reserva
+        update reserva
+        set estado = 0
+        where id = v_reserva;
+
+        --actualizamos el stock del producto utilizado
+        v_stock_nuevo := v_stock - v_cantidad;
+
+        update producto
+        set stock = v_stock_nuevo
+        where sku = v_sku;
+
+        --Guardamos la cotizacion
+        insert into cotizacion
+        values(cotizacion_seq.nextval,v_comentario,v_reserva,v_servicio,v_precio);
+
+
+        --Guardamos el detalle del servicio
+        insert into detalle_servicio
+        values(detalle_servicio_seq.nextval,v_cantidad,v_servicio,v_sku);
+
+    end;
+
+end;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_AGREGAR_CLIENTE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_AGREGAR_CLIENTE" 
+(
+V_RUN IN CLIENTE.RUT_CLI%type, 
+V_NOMBRE IN CLIENTE.NOMBRE%type, 
+V_APELLIDO IN CLIENTE.APELLIDO%TYPE,
+V_CONTACTO IN CLIENTE.CONTACTO%TYPE,
+V_ACTIVO IN CLIENTE.ACTIVO%TYPE,
+V_USERMAIL IN CLIENTE.USERMAIL%TYPE,
+V_PASSWORD IN CLIENTE.PASSWORD%TYPE,
+V_RUT_EMP IN CLIENTE.RUT_EMPRESA%TYPE,
+V_GIRO IN CLIENTE.GIRO%TYPE,
+V_RAZON IN CLIENTE.RAZON_SOCIAL%TYPE,
+
+v_salida out number
+
+)
+is
+begin
+    --cursor con los rut de los clientes
+    DECLARE
+        CURSOR c_cliente IS
+         SELECT RUT_CLI
+         FROM CLIENTE;
+
+        v_run_cliente CLIENTE.RUT_CLI%TYPE;
+
+        confirmacion NUMBER;
+    begin
+        confirmacion := 0;
+        for c in c_cliente loop
+            v_run_cliente := c.rut_cli;
+            --actualiza los datos del cliente
+            --cuando el rut del cliente coincide
+            if v_run_cliente = V_RUN THEN
+                update cliente set
+                    NOMBRE = V_NOMBRE,
+                    APELLIDO = V_APELLIDO,
+                    CONTACTO = V_CONTACTO,
+                    USERMAIL = V_USERMAIL,
+                    RUT_EMPRESA = V_RUT_EMP,
+                    GIRO = V_GIRO,
+                    RAZON_SOCIAL = V_RAZON
+                where rut_cli = V_RUN;
+                --actuliza los campos de accounts
+                update ACCOUNTS_ACCOUNT set
+                    FIRST_NAME = V_NOMBRE,
+                    LAST_NAME = V_APELLIDO,
+                    EMAIL = V_USERMAIL  
+                where EMAIL = V_USERMAIL;
+                confirmacion :=1;
+            end if;
+        end loop;
+        --si no existe el cliente lo registra en la tabla
+        if confirmacion != 1 then
+            insert into cliente
+            values(V_RUN,V_NOMBRE,V_APELLIDO,V_CONTACTO,V_ACTIVO,
+                    V_USERMAIL,V_PASSWORD,V_RUT_EMP,V_GIRO,V_RAZON);
+        end if;
+    commit;
+    end;
+v_salida := 1;
+
+exception
+    when DUP_VAL_ON_INDEX THEN
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error de dato duplicado');
+    WHEN OTHERS THEN 
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido');
+end;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_AGREGAR_PRODUCTO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "C##PY_TALLER"."SP_AGREGAR_PRODUCTO" (
+V_SKU IN PRODUCTO.SKU%TYPE, 
+V_NOMBRE IN producto.nombre_corto%type, 
+V_DESCRIPCION IN PRODUCTO.DESCRIPCION%TYPE,
+V_PRECIOC IN producto.precio_compra%TYPE,
+V_PRECIOV IN producto.precio_venta%TYPE,
+V_STOCK IN producto.stock%TYPE,
+V_STOCKCR IN producto.stock_critico%TYPE,
+V_ID_CAT IN producto.id_categoria%TYPE,
+V_FECHA IN varchar2,
+V_MEDIDA in varchar2,
+V_RUTPROV IN PROVEEDOR.RUT_PROVEEDOR%TYPE,
+v_salida out number
+) IS
+BEGIN
+	IF v_fecha = '00000000' THEN
+		INSERT INTO PRODUCTO VALUES(
+  V_SKU,V_NOMBRE,V_DESCRIPCION,
+  V_PRECIOC,V_PRECIOV ,V_STOCK,
+  V_STOCKCR,1,V_ID_CAT,
+  null,V_MEDIDA);
+  else
+  INSERT INTO PRODUCTO VALUES(
+  V_SKU,V_NOMBRE,V_DESCRIPCION,
+  V_PRECIOC,V_PRECIOV ,V_STOCK,
+  V_STOCKCR,1,V_ID_CAT,
+  v_fecha,V_MEDIDA);
+	END IF;
+
+
+
+  COMMIT;
+
+  INSERT INTO "PROV-PRODUCTO" VALUES(V_RUTPROV,V_SKU);
+  COMMIT;
+  V_SALIDA:= 1;
+  exception
+    when DUP_VAL_ON_INDEX THEN
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error de dato duplicado');
+    WHEN OTHERS THEN 
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido:'+ SQLERRM);
+END SP_AGREGAR_PRODUCTO;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_AGREGAR_SERVICIO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_AGREGAR_SERVICIO" 
+  (
+v_name servicio.nombre%type,
+v_precio servicio.precio%type,
+
+v_salida out number
+
+)
+is
+begin
+
+insert into servicio
+values(SEQ_IDSERVICIO.nextval,v_name,v_precio,1);
+commit;
+
+v_salida :=1;
+exception
+    when DUP_VAL_ON_INDEX THEN
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error de dato duplicado');
+    WHEN OTHERS THEN 
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido');
+END SP_AGREGAR_SERVICIO;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_AGREGAR_TRABAJADOR
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_AGREGAR_TRABAJADOR" 
+(
+V_RUN IN EMPLEADO.RUT_EMP%TYPE, 
+V_NOMBRE IN EMPLEADO.NOMBRE%type, 
+V_APELLIDO IN EMPLEADO.APELLIDOS%TYPE,
+V_TELEFONO IN EMPLEADO.TELEFONO%TYPE,
+V_ACTIVO IN EMPLEADO.ACTIVO%TYPE,
+V_TIPO_EMP IN EMPLEADO.ID_TIPO_EMP%TYPE,
+V_USERMAIL IN EMPLEADO.USERMAIL%TYPE,
+V_PASSWORD IN EMPLEADO.PASSWORD%TYPE,
+
+
+v_salida out number
+
+)
+is
+begin
+    --cursor con los rut de los clientes
+    DECLARE
+        CURSOR c_empleado IS
+         SELECT RUT_EMP
+         FROM EMPLEADO;
+
+        v_run_empleado EMPLEADO.RUT_EMP%TYPE;
+
+        confirmacion NUMBER;
+    begin
+        confirmacion := 0;
+        for c in c_empleado loop
+            v_run_empleado := c.rut_emp;
+            --actualiza los datos del cliente
+            --cuando el rut del cliente coincide
+            if v_run_empleado = V_RUN THEN
+                update empleado set
+                    NOMBRE = V_NOMBRE,
+                    APELLIDOS = V_APELLIDO,
+                    TELEFONO = V_TELEFONO,
+                    USERMAIL = V_USERMAIL
+                where rut_emp = V_RUN;
+                --actuliza los campos de accounts
+                update ACCOUNTS_ACCOUNT set
+                    FIRST_NAME = V_NOMBRE,
+                    LAST_NAME = V_APELLIDO,
+                    EMAIL = V_USERMAIL  
+                where EMAIL = V_USERMAIL;
+                confirmacion :=1;
+            end if;
+        end loop;
+        --si no existe el cliente lo registra en la tabla
+        if confirmacion != 1 then
+            insert into empleado
+            values(V_RUN,V_NOMBRE,V_APELLIDO,V_TELEFONO,V_ACTIVO,V_TIPO_EMP,
+                    V_USERMAIL,V_PASSWORD);
+        end if;
+    commit;
+    end;
+v_salida := 1;
+
+exception
+    when DUP_VAL_ON_INDEX THEN
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error de dato duplicado');
+    WHEN OTHERS THEN 
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido');
+end;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_LISTA_PRODUCTOS
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_LISTA_PRODUCTOS" 
+(REG OUT SYS_REFCURSOR)
+IS
+BEGIN
+OPEN REG FOR 
+SELECT sku, nombre_corto
+from producto
+where enuso = 1;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_LISTA_RESERVAS
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_LISTA_RESERVAS" 
+(REG OUT SYS_REFCURSOR)
+IS
+BEGIN
+OPEN REG FOR 
+SELECT id,to_date(fecha),cliente_rut_cli,comentario 
+FROM reserva
+where estado = 1
+order by fecha desc;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_LISTA_SERVICIOS
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_LISTA_SERVICIOS" 
+(REG OUT SYS_REFCURSOR)
+IS
+BEGIN
+OPEN REG FOR 
+SELECT id_sevicio, nombre 
+FROM servicio
+where enuso = 1;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_LISTA_TIPO_EMPLEADO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_LISTA_TIPO_EMPLEADO" 
+(REG OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+OPEN REG FOR 
+SELECT id_tipo_emp, seccion FROM tipo_empleado;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_REGISTRAR_RESERVA
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "C##PY_TALLER"."SP_REGISTRAR_RESERVA" (
+    v_fecha in VARCHAR2,
+    v_mail in cliente.usermail%type,
+    v_comentario in reserva.comentario%TYPE,
+    v_salida out number
+)
+IS 
+BEGIN
+    DECLARE
+        v_rut_cli  cliente.rut_cli%TYPE;
+
+    BEGIN     
+        --sacamos el rut del cliente
+        select rut_cli
+        into v_rut_cli
+        from cliente
+        where usermail = v_mail;
+
+        INSERT INTO RESERVA VALUES(null,TO_TIMESTAMP(v_fecha, 'dd/mm/yy HH24:MI:SS.FF'),1,v_rut_cli,v_comentario);
+        commit;
+        v_salida:=1;
+        exception
+        when DUP_VAL_ON_INDEX THEN
+            RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,'Error de dato duplicado');
+            v_salida:=0;
+        WHEN OTHERS THEN 
+            v_salida:=0;
+            RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,SQLERRM);
+
+    END;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_REGISTRO_VEHICULO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "C##PY_TALLER"."SP_REGISTRO_VEHICULO" (
+V_PATENTE IN VEHICULO.PANTENTE%TYPE,
+V_MARCA IN VEHICULO.MARCA%TYPE,
+V_MODELO IN VEHICULO.MODELO%TYPE,
+V_ANIO IN VEHICULO.ANIO%TYPE,
+V_RUT IN VEHICULO.CLIENTE_RUT_CLI%TYPE,
+V_SALIDA OUT NUMBER
+)
+IS
+BEGIN
+  INSERT INTO VEHICULO VALUES (V_PATENTE,V_MARCA,V_MODELO,V_ANIO,1,V_RUT);
+  COMMIT;
+v_salida :=1;
+exception
+    when DUP_VAL_ON_INDEX THEN
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error de dato duplicado');
+    WHEN OTHERS THEN 
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido');
+END SP_REGISTRO_VEHICULO;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_TIPO_CLIENTE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_TIPO_CLIENTE" 
+(
+v_seccion tipo_empleado.seccion%type,
+
+v_salida out number
+
+)
+is
+begin
+
+insert into tipo_empleado
+values(SEQ_TIPO_EMP.nextval,v_seccion);
+commit;
+
+v_salida :=1;
+exception
+    when DUP_VAL_ON_INDEX THEN
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error de dato duplicado');
+    WHEN OTHERS THEN 
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido');
+end;
+
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_TIPO_EMPLEADO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "C##PY_TALLER"."SP_TIPO_EMPLEADO" 
+(
+v_seccion tipo_empleado.seccion%type,
+
+v_salida out number
+
+)
+is
+begin
+
+insert into tipo_empleado
+values(SEQ_TIPO_EMP.nextval,v_seccion);
+commit;
+
+v_salida :=1;
+exception
+    when DUP_VAL_ON_INDEX THEN
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error de dato duplicado');
+    WHEN OTHERS THEN 
+        v_salida:=0;
+        RAISE_APPLICATION_ERROR(SEQ_ERROR.NEXTVAL,' Error desconocido');
+end;
+
+/

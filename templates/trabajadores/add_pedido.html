@@ -1,0 +1,65 @@
+{% extends 'trabajadores/home.html' %}
+
+{% block bst%}
+
+{% endblock %}
+
+{%block content%}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <h2> Lista de todos los productos disponibles </h2>
+        {{listaProductos}}
+        <div class="col-sm-8">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>SKU Producto</th>
+                        <th>Nombre</th>
+                        <th>Precio compra</th>
+                        <th>Precio Venta</th>
+                        <th>Stock Actual</th>
+                        <!--<th>Nivel Stock crítico</th>-->
+                        <th>fecha de Vencimiento</th>
+                        <th>Unidad de medida</th>
+                        <th>Opcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+     
+    
+                    {% for r in listaProductos %}
+                    
+                    <tr>
+                        <td>{{r.sku}}</td>
+                        <td>{{r.nombre_corto}}</td>
+                        <td>{{r.precio_compra}}</td>
+                        <td>{{r.precio_venta}}</td>
+                        {% if r.stock < r.stock_critico%}
+                        <td bgcolor="#ff3352">{{r.stock}}</td>
+                        {% else %}
+                        <td>{{r.stock}}</td>
+                        {% endif%}
+                        <!--<td>{{r.stock_critico}}</td>-->
+                        <td>{{r.fecha_vencimiento }}</td>
+                        <td>{{r.unidad_medida}}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning">
+                                <a style="text-decoration:none; color:white" href="{% url 'orden-pedido' r.sku %}">
+                                Pedir 
+                            </button>
+                        </td>
+    
+                    </tr>
+                    {%endfor%} 
+                </tbody>
+            </table>
+        </div>
+        
+        
+ 
+    </div>
+    
+<div>
+{% endblock %}

@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+<<<<<<< Updated upstream
     'administracion',
+=======
+    'administracion', 
+    'clientes',
+    'trabajadores'
+>>>>>>> Stashed changes
 ]
 
 MIDDLEWARE = [
@@ -82,7 +88,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': '127.0.0.1:1521/xe',
         'USER': 'c##py_taller',
+<<<<<<< Updated upstream
         'PASSWORD': 'TMSEadmin',
+=======
+        'PASSWORD': 'prueba',#'TMSEadmin',
+>>>>>>> Stashed changes
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',

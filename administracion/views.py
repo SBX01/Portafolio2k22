@@ -41,9 +41,14 @@ def registrar_servicio(request):
 
                     salida = add_servicio(nombre,precio)
                     mensajes(request,salida)
+<<<<<<< Updated upstream
         except:
              messages.error(request, 'Houston tenemos problemas.')
 
+=======
+                    return redirect('registro_servicio')
+                    
+>>>>>>> Stashed changes
         data ={
             'formulario': form,       
         }
