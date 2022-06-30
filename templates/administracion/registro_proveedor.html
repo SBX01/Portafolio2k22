@@ -1,0 +1,94 @@
+{% extends 'administracion\adminHome.html' %} {% block content %}
+<h3>Registro nuevo proveedor</h3>
+<div class="row">
+    <div class="card-body col-sm-2"></div>
+    <div class="card-body col-sm-6">
+        {% include 'includes/alerts.html'%}
+        <div class="card mx-auto " style="max-width:520px; margin-top:40px; ">
+            <article class="card-body">
+                <header class="mb-4">
+                    <h4 class="card-title">Registro de proveedor</h4>
+                    <h6>Todos los campos marcados con un asterisco son de carácter obligatorio</h6>
+                </header>
+                <form action="{% url 'registro_Proveedor'%}" method="POST" >
+                    {% csrf_token %}
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Run <span style="color:#ff0000">*</span></label> {{form.rut_proveedor}}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Nombres <span style="color:#ff0000">*</span></label> {{form.nombre}}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Email <span style="color:#ff0000">*</span></label> {{form.correo}}
+                        </div>
+                    </div>
+                        <div class="form-group col-md-6">
+                            <button type="submit" class="btn btn-primary btn-block"> Registrar proveedor </button>
+                        </div>
+                        <!-- form-group// -->
+                    </div>
+
+
+                    {{ form_emp.email.errors }} {{ form_emp.non_field_errors }}
+                </form>
+            </article>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+{% block scripts %}
+<script>
+    function checkRut(rut) {
+        // Despejar Puntos
+        var valor = rut.value.replace('.','');
+        // Despejar Guión
+        valor = valor.replace('-','');
+    
+        // Aislar Cuerpo y Dígito Verificador
+        cuerpo = valor.slice(0,-1);
+        dv = valor.slice(-1).toUpperCase();
+    
+        // Formatear RUN
+        rut.value = cuerpo + '-'+ dv
+    
+        // Si no cumple con el mínimo ej. (n.nnn.nnn)
+        if(cuerpo.length < 7) { rut.setCustomValidity("RUT Incompleto"); return false;}
+    
+        // Calcular Dígito Verificador
+        suma = 0;
+        multiplo = 2;
+    
+        // Para cada dígito del Cuerpo
+        for(i=1;i<=cuerpo.length;i++) {
+    
+            // Obtener su Producto con el Múltiplo Correspondiente
+            index = multiplo * valor.charAt(cuerpo.length - i);
+    
+            // Sumar al Contador General
+            suma = suma + index;
+    
+            // Consolidar Múltiplo dentro del rango [2,7]
+            if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+    
+        }
+    
+        // Calcular Dígito Verificador en base al Módulo 11
+        dvEsperado = 11 - (suma % 11);
+    
+        // Casos Especiales (0 y K)
+        dv = (dv == 'K')?10:dv;
+        dv = (dv == 0)?11:dv;
+    
+        // Validar que el Cuerpo coincide con su Dígito Verificador
+        if(dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
+    
+        // Si todo sale bien, eliminar errores (decretar que es válido)
+        rut.setCustomValidity('');
+    }
+</script>  
+{% endblock %} 

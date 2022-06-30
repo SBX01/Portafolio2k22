@@ -1,11 +1,15 @@
 {% extends 'administracion\adminHome.html' %} {% block content %}
-<h1>Registro de servicios</h1>
-<br>
-<p>Hola usuario {{user.first_name}}</p>
-<br><br><br>
 
-<div class="container">
-    <h4>Agregar Servicio</h4>
+
+<div class="container row">
+
+    <h1>Registro de servicios</h1>
+    <br>
+    <p>Hola usuario {{user.first_name}}</p>
+    <br><br><br>
+    <div class="col-sm-6">
+
+        <h4>Agregar Servicio</h4>
     {% include 'includes/alerts.html'%}
     <form name="formulario" action="{% url 'registro_servicio' %}" method="post">
         {% csrf_token %}
@@ -25,9 +29,49 @@
         <!-- form-group// -->
 
     </form>
+    </div>
+    <div class="col-sm-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre Servicio</th>
+                    <th>Precio Servicio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in listServicios %}
+                <tr>
+                   
+                    <td>{{s.nombre}}</td>
+                    <td>{{s.precio}}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" id="eliminar">
+                            <a style="text-decoration:none; color:white" href="{% url 'eliminar_servicio' s.id_sevicio%}">
+                            Eliminar
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning" >
+                            <a style="text-decoration:none; color:white" href="{% url 'editar_servicio' s.id_sevicio%}">
+                            Editar
+                        </button>
+                    </td>
+                       
+                </tr>
+                {%endfor%} 
+            </tbody>
+        </table>
+
+    </div>
+
+    
 </div>
 <!-- === ALERTAS === -->
 <script>
-    $('.alert').alert()
+    $('.btn-danger').click(function(){
+        return confirm("¿Estás seguro de eliminar el servicio?"); 
+
+})
+
 </script>
 <a href="{% url 'Administracion' %}">Volver</a> {% endblock %}

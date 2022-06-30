@@ -1,0 +1,45 @@
+{% extends 'clientes/clienteHome.html' %}{%block content%}
+<h2> Lista de todas las reservas disponibles </h2>
+
+<div class="container row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Fecha de reserva</th>
+                    <th>comentario</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in reserva %}
+                <tr>
+                   
+                    <td>{{r.fecha}}</td>
+                    <td>{{r.comentario}}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" id="eliminar">
+                            <a style="text-decoration:none; color:white" href="{% url 'eliminar_reserva' r.id %}">
+                            Cancelar
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning">
+                            <a style="text-decoration:none; color:white" href="{% url 'modificar_reserva' r.id %}">
+                            Modificar
+                        </button>
+                    </td>
+                       
+                </tr>
+                {%endfor%} 
+            </tbody>
+        </table>
+        
+<div>
+<script>
+    $('#eliminar').click(function(){
+        return confirm("¿Estás seguro de cancelar la reserva seleccionada?"); 
+    
+    });
+</script>
+{% endblock %}

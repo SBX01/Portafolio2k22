@@ -1,70 +1,41 @@
-{% extends 'trabajadores/home.html' %}
-{% block bst%}
+{% extends 'trabajadores/home.html' %}{%block content%}
+<h2> Lista de todas las reservas disponibles </h2>
 
-<style>
-    #detalle_reserva{
-        float: left;
-        margin-left: 15px;
-    }
-    #cotizacion{
-        float: right;
-        margin-right: 15px;
-        max-width: 700px;
-    }
-</style>
-
-{% endblock %}
-
-
-{%block content%}
-<div>
-    <div  id="detalle_reserva">
-        <h2> Lista de reservas </h2>
-        <div id="tablaReserva">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Folio reserva</th>
-                        <th>Fecha de reserva</th>
-                        <th>Comentario</th>
-                        <th>Rut cliente</th>
-                    </tr>
-                </thead>
-                    {% for r in lista %}
-                    <tr>
-                        <td>{{r.0}}</td>
-                        <td>{{r.1|date:"d-m-Y" }}</td>
-                        <td>{{r.3}}</td>
-                        <td>{{r.2}}</td>
-                        <th><input type="button" class="btnOpcion btn btn-success" value="Cotizar"></th>
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table> 
-        </div>      
-    </div>
-    <div id="cotizacion">
+<div class="container row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Fecha de reserva</th>
+                    <th>Comentario</th>
+                    <th>Rut cliente</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in reserva %}
+                <tr>
+                   
+                    <td>{{r.fecha}}</td>
+                    <td>{{r.comentario}}</td>
+                    <td>{{r.cliente_rut_cli}}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger">
+                            <a style="text-decoration:none; color:white" href="">
+                            Eliminar
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning">
+                            <a style="text-decoration:none; color:white" href="">
+                            Editar
+                        </button>
+                    </td>
+                       
+                </tr>
+                {%endfor%} 
+            </tbody>
+        </table>
         
-    </div>
-</div>
-
-<script>
-    $(".btnOpcion").click(function () {
-        var UserData = {};
-        var id = $(this).closest('tr').find('td');
-      
-        UserData = id.filter(":eq(0)").text();
-      
-        let url = '/trabajadores/cotizar_servicio/?id=' + UserData;
-      
-        fetch(url)
-            .then(function (result) {
-                return result.text();
-            })
-            .then(function (result) {
-                document.getElementById("cotizacion").innerHTML = result;
-            });
-    });
-</script>
-
+<div>
 {% endblock %}

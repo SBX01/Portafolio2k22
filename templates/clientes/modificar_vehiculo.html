@@ -1,0 +1,48 @@
+{% extends 'clientes/clienteHome.html' %}{%block content%}
+<div class="card-body col-sm-6">
+    <div class="card mx-auto " style="max-width:520px; margin-top:40px; ">
+        {% include 'includes/alerts.html'%}
+        <article class="card-body">
+            <header class="mb-4">
+                <h4 class="card-title">modificar vehiculo</h4>
+                <h6>Todos los campos marcados con un asterisco son de carácter obligatorio</h6>
+            </header>
+            <form action="{% url 'modificar_vehiculo' auto.pantente %} " method="POST" class="was-validated">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Numero de patente <span style="color:#ff0000"></span></label> 
+                        <input type="text" class="form-control" value="{{auto.pantente}}" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Marca <span style="color:#ff0000">*</span></label> {{form.marca}}
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Modelo<span style="color:#ff0000">*</span></label> {{form.modelo}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Año<span style="color:#ff0000">*</span></label> {{form.anio}}
+                    </div>
+                </div>
+               
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <button type="submit" class="btn btn-warning btn-block"> Guardar</button>
+                    </div>
+                    <!-- form-group// -->
+                </div>
+            </form>
+        </article>
+    </div>
+</div>
+<script>
+    $('.btn').click(function(){
+        return confirm("¿Estás seguro de guardar los cambios?"); 
+    
+    });
+</script>
+{%endblock%}

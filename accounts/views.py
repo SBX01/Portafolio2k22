@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm
-from .models import Account
+from .models import Account, Roles
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
@@ -30,23 +30,17 @@ def register(request):
             razon = form.cleaned_data['razon_social']
             password = form.cleaned_data['password']
             username = email.split("@")[0]
-            user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
+            user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email,role='client', username=username, password=password)
             user.phone_number = phone_number
-            
             user.save()
 
             pasw = make_password(password)
             #llamar al procedimiento almacenado
             agregar_cliente(run,first_name,last_name,phone_number,1,email,pasw,rut_emp,giro,razon)
-<<<<<<< Updated upstream
-
-=======
-            
->>>>>>> Stashed changes
-            
+        
             #manda link de activacion de cuenta al correo
             current_site = get_current_site(request)
-            mail_subject = 'por favor activa tu cuenta en NOMBRE DEL TALLER'
+            mail_subject = 'por favor activa tu cuenta de SERVIEXPRESS'
             body = render_to_string('accounts/account_verification_email.html', {
                 'user' : user,
                 'domain' : current_site,
@@ -56,9 +50,7 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, body, to=[to_email])
             send_email.send()
-
-
-            #messages.success(request, 'Se registro el Usuario exitosamente')
+           
             return redirect('/accounts/login/?command=verification&email='+email)
 
     context = {
@@ -139,6 +131,11 @@ def activate(request, uidb64, token):
 def dashboard(request):
     return render(request,'accounts/dashboard.html')
 
+def mensajes(request,salida):
+    if salida == 1:
+        messages.success(request, 'Se agregó correctamente.')
+    else:
+        messages.error(request, 'Houston tenemos problemas.')
 
 def forgotPassword(request):
     if request.method == 'POST':

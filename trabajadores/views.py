@@ -4,7 +4,9 @@ from django.shortcuts import redirect, render
 from administracion.models import MedioPago, Reserva,Empleado,Cliente, Producto, OrdenPedidoProducto,Proveedor, OrdenProducto,Documento,TipoDocumento,Servicio
 from django.contrib.auth.decorators import login_required
 from django.db import connection
-from datetime import datetime
+from datetime import datetime, timedelta
+
+
 
 # Create your views here.
 
@@ -23,8 +25,11 @@ def workerHome(request):
 def listaReservas(request):
     
     if workerValid(request) ==  True:
-        fecha=datetime.today().strftime('%Y-%m-%d')
-        reservas = Reserva.objects.filter(estado =1, fecha= fecha)
+        hoydia=datetime.today().strftime('%Y-%m-%d')
+        startdate = datetime.today()
+        enddate = startdate + timedelta(days=3)
+        fechafin = enddate.strftime('%Y-%m-%d')
+        reservas = Reserva.objects.filter(fecha =hoydia , estado=1)
 
         data = {
             'reserva':reservas,

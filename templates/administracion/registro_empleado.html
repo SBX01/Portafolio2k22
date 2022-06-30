@@ -1,11 +1,13 @@
 {% extends 'administracion\adminHome.html' %} {% block content %}
-<h3>Registro nuevo empleado</h3>
-<div class="row">
+
+<div class="container row">
+    <h3>Registro nuevo empleado</h3>
+    {% include 'includes/alerts.html'%}
     <div class="card-body col-sm-2">
 
         <div class="card mx-auto" style="max-width:220px; margin-top:40px; margin-left: 30px;">
             <h4>Agregar tipo de empleado</h4>
-            {% include 'includes/alerts.html'%}
+            
             <form action="{% url 'tipo_empleado'%}" method="post">
                 {% csrf_token %}
 
@@ -96,13 +98,59 @@
             </article>
         </div>
     </div>
+    <div class="card-body col-sm-4">
+        <div class="card mx-auto " style="max-width:520px; margin-top:40px; ">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Rut</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">cargo</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for e in listEmp %}
+                    <tr>
+                        <td>{{e.rut_emp}}</td>
+                        <td>{{e.nombre}} {{e.apellidos}}</td>
+                        <td>{{e.id_tipo_emp}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger" id="eliminar">
+                                <a style="text-decoration:none; color:white" href="{% url 'eliminarempleado' e.rut_emp %}">
+                                Eliminar
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-warning">
+                                <a style="text-decoration:none; color:white" href="{% url 'editar_empleado' e.rut_emp %}">
+                                Modificar
+                            </button>
+                        </td>
+                    
+                    </tr>
+                    {%endfor%} 
+                
+                </tbody>
+            </table>
+        </div>
 
+  
+        
+        
+        
+    </div>
 </div>
-
+<script>
+    $('#eliminar').click(function(){
+        return confirm("¿Estás seguro de eliminar al empleado seleccionado?"); 
+    
+    });
+</script>   
 
 {% endblock %}
 {% block scripts %}
 <script>
+    
     function checkRut(rut) {
         // Despejar Puntos
         var valor = rut.value.replace('.','');

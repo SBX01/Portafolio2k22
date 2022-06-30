@@ -1,0 +1,85 @@
+{% extends 'clientes/clienteHome.html' %}{%block content%}
+<div class="card-body col-sm-6">
+    <div class="card mx-auto " style="max-width:520px; margin-top:40px; ">
+        {% include 'includes/alerts.html'%}
+        <article class="card-body">
+            <header class="mb-4">
+                <h4 class="card-title">Agregar vehiculo</h4>
+                <h6>Todos los campos marcados con un asterisco son de carácter obligatorio</h6>
+            </header>
+            <form action="{% url 'registro_vehiculo' %} " method="POST" class="was-validated">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Numero de patente <span style="color:#ff0000">*</span></label> {{form.pantente}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Marca <span style="color:#ff0000">*</span></label> {{form.marca}}
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Modelo<span style="color:#ff0000">*</span></label> {{form.modelo}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Año<span style="color:#ff0000">*</span></label> {{form.anio}}
+                    </div>
+                </div>
+               
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <button type="submit" class="btn btn-warning btn-block"> Guardar</button>
+                    </div>
+                    <!-- form-group// -->
+                </div>
+            </form>
+        </article>
+    </div>
+</div>
+<div class="col-sm-6">
+        <h2> Vehiculos registrados</h2>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Patente</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Año</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in listaVehiculos %}
+                <tr>
+                   
+                    <td>{{r.pantente}}</td>
+                    <td>{{r.marca}}</td>
+                    <td>{{r.modelo}}</td>
+                    <td>{{r.anio}}</td>
+
+                    <td>
+                        <button type="button" class="btn btn-danger" id="eliminar">
+                            <a style="text-decoration:none; color:white" href="{% url 'eliminar_vehiculo' r.pantente %}">
+                            Eliminar
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning">
+                            <a style="text-decoration:none; color:white" href="{% url 'modificar_vehiculo' r.pantente %}">
+                            Editar
+                        </button>
+                    </td>
+                       
+                </tr>
+                {%endfor%} 
+            </tbody>
+        </table>
+        
+<script>
+    $('.btn-danger').click(function(){
+        return confirm("¿Estás seguro de eliminar el vehiculo seleccionado?"); 
+    
+    });
+</script>
+{%endblock%}

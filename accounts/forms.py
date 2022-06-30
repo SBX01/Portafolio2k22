@@ -18,12 +18,14 @@ class RegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs ):
         super(RegistrationForm, self).__init__(*args, **kwargs)
         self.fields['rut_cli'].widget.attrs['placeholder'] = '123456789-0'
+        self.fields['rut_cli'].widget.attrs['onInput'] = 'checkRut(this)'
         self.fields['nombre'].widget.attrs['placeholder'] = 'Ingrese nombre'
         self.fields['apellido'].widget.attrs['placeholder'] = 'Ingrese apellidos'
         self.fields['contacto'].widget.attrs['placeholder'] = 'Ingrese Telefono'
         self.fields['contacto'].required = False
         self.fields['usermail'].widget.attrs['placeholder'] = 'Ingrese email'
         self.fields['rut_empresa'].widget.attrs['placeholder'] = 'Ingrese rut de la empresa'
+        self.fields['rut_empresa'].widget.attrs['onInput'] = 'checkRut(this)'
         self.fields['rut_empresa'].required = False
         self.fields['giro'].widget.attrs['placeholder'] = 'Ingrese giro'
         self.fields['giro'].required = False

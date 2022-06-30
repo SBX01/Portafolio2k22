@@ -11,7 +11,7 @@ Roles = (
 )
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, first_name, last_name, username, email, password=None):
+    def create_user(self, first_name, last_name,role , username, email, password=None):
         if not email:
             raise ValueError('El usuario debe tener un email')
 
@@ -23,6 +23,7 @@ class MyAccountManager(BaseUserManager):
             username = username,
             first_name = first_name,
             last_name = last_name,
+            role = role
         )
 
         user.set_password(password)

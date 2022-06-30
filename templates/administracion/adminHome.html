@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="pragma" content="no-cache" />
@@ -7,11 +7,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <title>Taller mecanico</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.38.0/js/tempusdominus-bootstrap-4.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.38.0/css/tempusdominus-bootstrap-4.min.css" crossorigin="anonymous" />
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 
 {% block bst%}
 {% endblock %}
@@ -26,7 +27,7 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Administracion serviexpress</a>
+        <a class="navbar-brand" href="/admin">Administracion serviexpress</a>
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="{% url 'Administracion' %}">Home</a></li>
@@ -35,9 +36,9 @@
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{% url 'registro_servicio' %}">Registrar servicios</a></li>
-		        <li><a href="{% url 'registro_empleado'%}">Registrar nuevos usuarios</a></li>
-            <li><a href="#">Lista de empleados</a></li>
-            <li><a href="#">Agregar tipo de empleado</a></li>
+		        <li><a href="{% url 'registro_empleado'%}">Registrar Empleados</a></li>
+            <li><a href="{% url 'agregar_producto'%}">Registrar Productos</a></li>
+            <li><a href="{% url 'registro_Proveedor'%}">Registrar Proveedor</a></li>
           </ul>
         </li>
         <li><a href="{% url 'home' %}">Ver sitio web</a></li>

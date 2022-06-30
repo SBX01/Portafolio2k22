@@ -1,0 +1,59 @@
+{% extends 'administracion\adminHome.html' %} {% block content %}
+<div class="card-body col-sm-6">
+    <div class="card mx-auto " style="max-width:520px; margin-top:40px; ">
+        {% include 'includes/alerts.html'%}
+        <article class="card-body">
+            <header class="mb-4">
+                <h4 class="card-title">Modificación de Empleado</h4>
+                <h6>Todos los campos marcados con un asterisco son de carácter obligatorio</h6>
+            </header>
+            <form action="{% url 'editar_empleado' emp.rut_emp%} " method="POST" class="was-validated">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Run <span style="color:#ff0000">*</span></label> {{emp.rut_emp}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Nombre <span style="color:#ff0000">*</span></label> {{form.nombre}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Apellido <span style="color:#ff0000">*</span></label> {{form.apellidos}}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Telefono <span style="color:#ff0000">*</span></label> {{form.telefono}}
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputFile">Tipo de empleado <span style="color:#ff0000">*</span></label> 
+                        <select class="form-control" name="tipo_empleado" id="tipo_empleado" required="">
+                            <option value="">Seleccione el cargo</option>
+                            {% for i in tip_emp %}
+                            <option value="{{i.0}}">{{i.1}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <button type="submit" class="btn btn-warning btn-block"> Guardar cambios </button>
+                    </div>
+                    <!-- form-group// -->
+                </div>
+            </form>
+        </article>
+    </div>
+</div>
+<script>
+    $('.btn').click(function(){
+        return confirm("¿Estás seguro de modificar el empleado?"); 
+
+})
+
+</script>
+{%endblock%}

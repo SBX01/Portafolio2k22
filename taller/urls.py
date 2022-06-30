@@ -21,14 +21,11 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('', views.home, name="home"),
     path('accounts/', include('accounts.urls')),
     path('administracion/', include('administracion.urls')),
-<<<<<<< Updated upstream
-=======
     path('clientes/', include('clientes.urls')),
     path('trabajadores/', include('trabajadores.urls')),
->>>>>>> Stashed changes
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

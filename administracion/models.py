@@ -76,6 +76,9 @@ class Cliente(models.Model):
         managed = False
         db_table = 'cliente'
 
+    def __str__(self):
+        return str(self.rut_cli)
+
 
 class Cotizacion(models.Model):
     numero_folio = models.IntegerField(primary_key=True)
@@ -178,14 +181,17 @@ class Empleado(models.Model):
     nombre = models.CharField(max_length=30)
     apellidos = models.CharField(max_length=50)
     telefono = models.IntegerField()
-    activo = models.FloatField()
-    id_tipo_emp = models.ForeignKey('TipoEmpleado', models.DO_NOTHING, db_column='id_tipo_emp')
+    activo = models.BooleanField()
+    id_tipo_emp = models.ForeignKey('TipoEmpleado',on_delete=models.RESTRICT, db_column='id_tipo_emp')
     usermail = models.CharField(max_length=100)
     password = models.CharField(max_length=300)
 
     class Meta:
         managed = False
         db_table = 'empleado'
+    
+    def __str__(self):
+        return str(self.nombre)
 
 
 class GrupoProducto(models.Model):
@@ -196,6 +202,9 @@ class GrupoProducto(models.Model):
     class Meta:
         managed = False
         db_table = 'grupo_producto'
+
+    def __str__(self):
+        return self.nombre
 
 
 class MedioPago(models.Model):
@@ -239,7 +248,7 @@ class Producto(models.Model):
     precio_venta = models.IntegerField()
     stock = models.IntegerField()
     stock_critico = models.IntegerField()
-    enuso = models.FloatField()
+    enuso = models.BooleanField()
     id_categoria = models.ForeignKey(GrupoProducto, models.DO_NOTHING, db_column='id_categoria')
     fecha_vencimiento = models.DateField(blank=True, null=True)
     unidad_medida = models.CharField(max_length=50)
@@ -271,13 +280,11 @@ class Proveedor(models.Model):
 
 class Reserva(models.Model):
     id = models.IntegerField(primary_key=True)
-    fecha = models.DateField()
+    fecha = models.DateTimeField()
     estado = models.FloatField()
     cliente_rut_cli = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_rut_cli')
-<<<<<<< Updated upstream
-=======
     comentario = models.CharField(max_length=200)
->>>>>>> Stashed changes
+
 
     class Meta:
         managed = False
@@ -288,7 +295,7 @@ class Servicio(models.Model):
     id_sevicio = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=35)
     precio = models.IntegerField()
-    enuso = models.FloatField()
+    enuso = models.BooleanField()
 
     class Meta:
         managed = False
@@ -312,6 +319,9 @@ class TipoEmpleado(models.Model):
         managed = False
         db_table = 'tipo_empleado'
 
+    def __str__(self):
+        return str(self.seccion)
+
 
 class TipoProducto(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -321,13 +331,16 @@ class TipoProducto(models.Model):
         managed = False
         db_table = 'tipo_producto'
 
+    def __str__(self):
+        return str(self.nombre)
+
 
 class Vehiculo(models.Model):
     pantente = models.CharField(primary_key=True, max_length=6)
     marca = models.CharField(max_length=30)
     modelo = models.CharField(max_length=30)
     anio = models.IntegerField()
-    activo = models.FloatField()
+    activo = models.BooleanField()
     cliente_rut_cli = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_rut_cli')
 
     class Meta:
