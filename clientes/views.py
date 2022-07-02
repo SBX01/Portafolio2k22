@@ -114,7 +114,7 @@ def listaReservas(request):
     if clientValid(request) == True:
         cli = Cliente.objects.filter(usermail=request.user.email)
         rut_cli = str(cli[0])
-        reservas = Reserva.objects.filter(cliente_rut_cli=rut_cli,estado=1)
+        reservas = Reserva.objects.filter(cliente_rut_cli=rut_cli,estado=0)
         data = {
             'reserva':reservas,
             'esCliente':True

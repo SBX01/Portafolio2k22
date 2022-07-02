@@ -1153,7 +1153,6 @@ SET DEFINE OFF;
 --------------------------------------------------------
 --  Constraints for Table TIPO_EMPLEADO
 --------------------------------------------------------
-
   ALTER TABLE "C##PY_TALLER"."TIPO_EMPLEADO" MODIFY ("ID_TIPO_EMP" NOT NULL ENABLE);
   ALTER TABLE "C##PY_TALLER"."TIPO_EMPLEADO" MODIFY ("SECCION" NOT NULL ENABLE);
   ALTER TABLE "C##PY_TALLER"."TIPO_EMPLEADO" ADD CONSTRAINT "TIPO_EMPLEADO_PK" PRIMARY KEY ("ID_TIPO_EMP")

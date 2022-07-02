@@ -2,10 +2,12 @@ from ast import Pass
 from cmath import e
 from genericpath import exists
 import imp
+from msilib.schema import ListView
 from pickle import TRUE
 from sqlite3 import Cursor
 from time import strftime
 import django
+from django.http import Http404
 from django.shortcuts import redirect, render
 from .models import Empleado, GrupoProducto, Producto, Proveedor, Servicio, TipoEmpleado, TipoProducto
 from accounts.models import Roles, Account
@@ -14,6 +16,8 @@ from django.db import connection
 from django.contrib.auth.hashers import make_password
 import cx_Oracle
 from django.contrib import messages
+from django.core.paginator import Paginator
+
 
 # Create your views here.
 
@@ -257,11 +261,22 @@ def eliminarEmp(request,rut_empleado):
     emp = Empleado.objects.get(rut_emp = rut_empleado)
     emp.activo = 0
     emp.save()
-    return redirect('registro_empleado')
+    return redirect('registro_empleado')   
 
 def addProducto(request):
+
     if is_admin(request) == True:
         form = AddProducto()
+        qrset = Producto.objects.all().filter(enuso = 1).order_by('sku')
+
+        page_number = request.GET.get('page',1)
+        try:
+            paginator = Paginator(qrset,2)
+            qrset = paginator.page(page_number)
+        except:
+            raise Http404    
+        print(qrset)
+            
         if request.method == 'POST':
             form = AddProducto(request.POST)
             if form.is_valid():
@@ -326,7 +341,8 @@ def addProducto(request):
             'categorias': GrupoProducto.objects.all(),
             'supliers': Proveedor.objects.all(),
             'tipos': TipoProducto.objects.all(),
-            'productos': Producto.objects.filter(enuso = 1)
+            'entity': qrset,
+            'paginator':paginator
         }       
         return render(request,'administracion/agregar_producto.html', data)
     return redirect('home')

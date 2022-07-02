@@ -25,11 +25,7 @@ def workerHome(request):
 def listaReservas(request):
     
     if workerValid(request) ==  True:
-        hoydia=datetime.today().strftime('%Y-%m-%d')
-        startdate = datetime.today()
-        enddate = startdate + timedelta(days=3)
-        fechafin = enddate.strftime('%Y-%m-%d')
-        reservas = Reserva.objects.filter(fecha =hoydia , estado=1)
+        reservas = Reserva.objects.filter(estado=1)
 
         data = {
             'reserva':reservas,
@@ -174,6 +170,7 @@ def GenerarPDF():
     #funcion a ejecutar despues del pedidoPDF
     pass
 
+#agregar funcionalidad para recuperar servicio y guardarlo en una tupla para despues ser enviada a la bd
 
 
 class consultasBD():
