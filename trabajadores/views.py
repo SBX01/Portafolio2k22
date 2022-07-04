@@ -5,6 +5,9 @@ from administracion.models import MedioPago, Reserva,Empleado,Cliente, Producto,
 from django.contrib.auth.decorators import login_required
 from django.db import connection
 from datetime import datetime, timedelta
+import cx_Oracle
+
+from django.contrib import messages
 
 
 
@@ -172,7 +175,60 @@ def GenerarPDF():
 
 #agregar funcionalidad para recuperar servicio y guardarlo en una tupla para despues ser enviada a la bd
 
+def crearVenta(request,tipodoc):
 
+    if request.POST:
+        tipo =request.POST.get('doc')
+        print(tipo)
+        total = request.POST.get('total')
+        servicioElegido = request.POST.getlist('servicio')
+        mailEmp = request.user.email
+        clienteSeleccionado = request.POST.get('Rut_cliente')
+        descuentos = 0#(request.POST.get('descuento'))
+        pago = int(request.POST.get('medioPago'))
+        print(pago)
+        if not total=='0':
+            crear_documento_venta(tipo,mailEmp,clienteSeleccionado,total,pago,descuentos)
+            mensajes(request,1)
+        else:
+            mensajes(request,0,"Calcule el total antes de enviar.")
+        for col in servicioElegido: 
+            crear_detalle_venta(col)
+  
+
+        
+
+    data = {
+        'servicios' : Servicio.objects.all().filter(enuso = 1),
+        'Clientes' : Cliente.objects.all().filter(activo =1),
+        'pago': MedioPago.objects.all().filter(enuso = 1)
+    }
+    return render(request, 'trabajadores/DocumentoVenta.html', data)
+
+def crear_documento_venta(tipo_doc, mail_emp,rut_cli,total,tipoPago,descuento):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('SP_CREAR_DOCUMENTO',[total,tipo_doc,mail_emp,rut_cli,tipoPago,descuento,salida])
+
+def crear_detalle_venta(servicioSelect):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    cursor.callproc('sp_detalle_documento',[servicioSelect])
+
+def mensajes(request,salida,mensajeEnvio=None):
+    if salida == 1:
+        if mensajeEnvio is None:
+
+            messages.success(request, 'El proceso se finalizó correctamente.')
+        else:
+             
+            messages.success(request, mensajeEnvio)
+    else:
+        if mensajeEnvio is None:
+            messages.error(request, 'Houston tenemos problemas.' )
+        else:
+            messages.error(request, mensajeEnvio)
 class consultasBD():
     def prov_producto(sku):
         

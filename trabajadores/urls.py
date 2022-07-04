@@ -10,5 +10,6 @@ urlpatterns = [
     path('detalle_pedido/', views.DetallePedido, name='detalle_pedido'),
     path('cotizar_servicio/', views.cotizar_servicio, name='cotizar_servicio'),
     path('add_cotizacion/', views.add_cotizacion, name='add_cotizacion'),
+    path('ventas/<int:tipodoc>', views.crearVenta, name='documento_venta'),
     
 ]

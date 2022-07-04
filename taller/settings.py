@@ -143,11 +143,11 @@ MESSAGE_TAGS = {
 }
 
 #correos
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'serviexpresstallermecanico@gmail.com'
-EMAIL_HOST_PASSWORD = 'taller1234'
-EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.yopmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'serviexpresstaller@yopmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
