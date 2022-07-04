@@ -1,0 +1,78 @@
+<section class="section-content padding-y">
+    <div class="card mx-auto">
+        <article class="card-body">
+
+            <header class="mb-4">
+                <h4 class="card-title">Cotizacion</h4>
+                
+            </header>
+            <!--Form usuario normal-->
+
+            <form action="{% url 'add_cotizacion'%}" method="POST" class="was-validated">
+                {%csrf_token%}
+
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label>N° de reserva</label>
+                        <input type="text" class="form-control" name="reserva" id="reserva" value="{{reserva.id}}" readonly="True">
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                        <label>Comentario</label>
+                        <input type="text" class="form-control" name="comentario" id="comentario" value="">
+                    </div> <!-- form-group end.// -->
+                </div> <!-- form-row end.// -->
+                <div class="form-row">
+                    <div class="col form-group">
+                    <label for="exampleInputFile">Servicio</label>
+                    <select class="form-control" name="servicio" id="servicio">
+                        <option value="">Selecciona</option>
+                        {%for i in servicio%}
+                        <option value="{{i.0}}">{{i.1}}</option>
+                        {%endfor%}
+                    </select>
+                    </div> <!-- form-group end.// -->
+                </div>
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label for="exampleInputFile">Producto</label>
+                        <select class="form-control" name="producto" id="producto">
+                            <option value="">Selecciona</option>
+                            {%for i in productos%}
+                            <option value="{{i.0}}">{{i.1}}</option>
+                            {%endfor%}
+                        </select>
+                    </div><!-- form-group end.// -->
+                    <div class="col form-group">
+                        <label>Cantidad</label>
+                        <input type="number" class="form-control" name="cantidad" id="cantidad">
+                    </div> <!-- form-group end.// -->
+                </div>
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label for="exampleInputFile">Medio de pago</label>
+                        <select class="form-control" name="pago" id="pago">
+                            <option value="">Selecciona</option>
+                            {%for i in pago%}
+                            <option value="{{i.0}}">{{i.1}}</option>
+                            {%endfor%}
+                        </select>
+                    </div><!-- form-group end.// -->
+                </div>
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label for="exampleInputFile">Tipo documento</label>
+                        <select class="form-control" name="documento" id="documento">
+                            <option value="">Selecciona</option>
+                            {%for i in documento%}
+                            <option value="{{i.0}}">{{i.1}}</option>
+                            {%endfor%}
+                        </select>
+                    </div><!-- form-group end.// -->
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btnCotizar btn btn-primary btn-block">Cotizar servicio</button>
+                </div> <!-- form-group// -->
+            </form>
+        </article>
+    </div>
+</section>

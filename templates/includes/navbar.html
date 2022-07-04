@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" id="navbarTop4">
 
     <ul class="navbar-nav">
-		<li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Llamanos</a></li>
+		<li><a href="#" class="nav-link"> <i class="fa fa-phone"></i></a></li>
 	</ul> <!-- list-inline //  -->
   </div> <!-- navbar-collapse .// -->
 </div> <!-- container //  -->
@@ -19,7 +19,7 @@
 <div class="row align-items-center">
 	<div class="col-lg-9 col-md-3 col">
 		<a href="{% url 'home'%}" class="brand-wrap">
-			<!--img class="logo" src="#"-->
+			<!--img class="logo" src="#"--><h3 class="lead">Servicios Mecánicos SERVIEXPRESS</h3>
 		</a> <!-- brand-wrap.// -->
 	</div>
 		
@@ -40,21 +40,21 @@
 					<div class="widget-header">
 								  <small class="title text-muted">Bienvenido {{ user.first_name }}! {{user.role}}</small>
 								  <div>
-									  <a href="#">Dashboard</a> <span class="dark-transp"> | </span>
-									  <a href="{% url 'logout'%}"> Cerrar sesion </a>
-									  {% if user.is_staff %}
-									  <a href="{% url 'Administracion'%}"> Administracion </a>
-									  {% else %}
-									  <a href="{% url 'clientes'%}"> Servicio de reservas </a>
-									  {% endif %}
+									  	<a href="{% url 'logout'%}"> Cerrar sesion </a><span class="dark-transp"> | </span>
+
+										{% if user.role == 'client' %}
+										<a href="{% url 'clientes'%}"> Servicio de reservas </a>
+										{% endif %}
+									  	{% if user.is_staff %}
+									  	<a href="{% url 'Administracion'%}"> Administracion </a>
+									  	{% endif %}
+									  	{% if user.role == 'worker' %}
+									  	<a href="{% url 'trabajadores'%}"> servicios mecánicos </a>
+									  	{% endif %}
 								  </div>
 							  </div>
 		  
-					{% endif %}
-					<a href="#" class="widget-header pl-3 ml-3">
-						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-						<span class="badge badge-pill badge-danger notify"></span>
-					</a>	
+					{% endif %}	
 				</div>
 					
 				</div> <!-- widgets-wrap.// -->

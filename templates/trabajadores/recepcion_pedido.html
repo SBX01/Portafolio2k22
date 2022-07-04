@@ -1,0 +1,81 @@
+{% extends 'trabajadores/home.html' %}
+
+{% block bst%}
+<style>
+    #listado{
+        float: left;
+        margin-left: 30px;
+    }
+    #formulario{
+        float: right;
+        margin-right: 60px;
+    }
+    #tablaPedido{
+        margin-right: 70px;
+        max-width: 600px;
+    }
+    .table{
+        text-align: center;
+    }
+
+</style>
+{% endblock %}
+
+{%block content%}
+
+<div>
+    <div id="listado">
+        <h2>Listado de pedidos realizados</h2>
+        
+        <div id="tablaPedido">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Folio pedido</th>
+                    <th>Rut proveedor</th>
+                    <th>Producto</th>
+                    <th>cantidad pedida</th>
+                    <th>Opcion</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                {% for pedido in orden%}
+                  <tr>
+                    
+                    <td>{{pedido.0}}</td>
+                    <td>{{pedido.1}}</td>
+                    <td>{{pedido.3}} {{pedido.4}}</td>
+                    <td>{{pedido.2}}</td>
+                    <th><input type="button" class="btnOpcion btn btn-success" value="Detalle"></th>
+                    
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="formulario">
+        
+    </div>
+</div>
+
+<script>
+  $(".btnOpcion").click(function () {
+      var UserData = {};
+      var id = $(this).closest('tr').find('td');
+
+      UserData = id.filter(":eq(0)").text();
+
+      let url = '/trabajadores/detalle_pedido/?pedido=' + UserData;
+
+      fetch(url)
+        .then(function (result) {
+            return result.text();
+        })
+        .then(function (result) {
+            document.getElementById("formulario").innerHTML = result;
+        });
+  });
+</script>
+{% endblock %}

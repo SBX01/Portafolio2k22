@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'administracion', 
-    'clientes'
+    'clientes',
+    'trabajadores'
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': '127.0.0.1:1521/xe',
         'USER': 'c##py_taller',
-        'PASSWORD':'TMSEadmin',#prueba,
+        'PASSWORD': 'TMSEadmin',
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',
@@ -142,11 +143,11 @@ MESSAGE_TAGS = {
 }
 
 #correos
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'serviexpresstallermecanico@gmail.com'
-EMAIL_HOST_PASSWORD = 'taller1234'
-EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.yopmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'serviexpresstaller@yopmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

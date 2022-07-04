@@ -12,7 +12,8 @@ UnidadMedida=(
     ('centimetro cubico','cc'),
     ('pulgada','in'),
     ('litro','L'),
-    ('centimetro','cm')
+    ('centimetro','cm'),
+    ('kilo','Kg')
 )
 
 

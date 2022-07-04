@@ -1,0 +1,15 @@
+select doc.folio,ddoc.servicio_id_sevicio as servicio_id,doc.fecha_emision,ser.nombre,
+ser.precio precio_servicio,dser.cantidad,pro.nombre_corto||' '||pro.descripcion producto,
+pro.precio_venta,
+doc.total,doc.rut_emp,emp.nombre||' '||emp.apellidos as nombre_empleado,
+doc.rut_cli,cli.nombre||' '||cli.apellido as nombre_cliente
+from documento doc join detalle_documento ddoc 
+on(doc.id_documento = ddoc.documento_id_documento)
+join servicio ser on (ser.id_sevicio = ddoc.servicio_id_sevicio)
+join cotizacion co on(co.id_sevicio = ser.id_sevicio)
+join empleado emp on(emp.rut_emp = doc.rut_emp)
+join cliente cli on (cli.rut_cli = doc.rut_cli)
+join detalle_servicio dser on (dser.servicio_id_sevicio = ser.id_sevicio)
+join producto pro on (pro.sku = dser.producto_sku)
+where cli.rut_cli = '11961392-2' and dser.id_detalle_servicio = 41
+;

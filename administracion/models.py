@@ -218,17 +218,17 @@ class MedioPago(models.Model):
 
 
 class OrdenProducto(models.Model):
-    sku_fk = models.OneToOneField('Producto', models.DO_NOTHING, db_column='sku_fk', primary_key=True)
+    sku_fk = models.ForeignKey('Producto', models.DO_NOTHING, db_column='sku_fk')
     folio_pedido_fk = models.ForeignKey('OrdenPedidoProducto', models.DO_NOTHING, db_column='folio_pedido_fk')
+    orden_id = models.FloatField(primary_key=True)
 
     class Meta:
         managed = False
         db_table = 'orden-producto'
-        unique_together = (('sku_fk', 'folio_pedido_fk'),)
 
 
 class OrdenPedidoProducto(models.Model):
-    folio_pedido = models.IntegerField(primary_key=True)
+    folio_pedido = models.AutoField(primary_key=True)
     cantidad = models.IntegerField()
     fecha_emision = models.DateField()
     recibido = models.FloatField()
@@ -241,7 +241,7 @@ class OrdenPedidoProducto(models.Model):
 
 
 class Producto(models.Model):
-    sku = models.IntegerField(primary_key=True)
+    sku = models.CharField(primary_key=True, max_length=20)
     nombre_corto = models.CharField(max_length=30)
     descripcion = models.CharField(max_length=200)
     precio_compra = models.IntegerField()
@@ -283,7 +283,8 @@ class Reserva(models.Model):
     fecha = models.DateTimeField()
     estado = models.FloatField()
     cliente_rut_cli = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_rut_cli')
-    comentario = models.CharField(max_length=350)
+    comentario = models.CharField(max_length=200)
+
 
     class Meta:
         managed = False

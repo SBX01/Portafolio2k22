@@ -36,7 +36,8 @@
           <ul class="dropdown-menu">
             <li><a href="{% url 'registro_reserva' %}">Registrar reserva</a></li>
             <li><a href="{% url 'registro_vehiculo' %}">Registrar vehiculo</a></li>
-            <li><a href="{% url 'lista_reserva' %}">Ver reservas</a></li>
+            <li><a href="{% url 'lista_reservas' %}">Ver reservas</a></li>
+            <li><a href="{% url 'lista_servicio' %}">Ver documentos</a></li>
           </ul>
         </li>
         <li><a href="{% url 'home' %}">Ver sitio web</a></li>
@@ -46,9 +47,9 @@
     </div>
   </nav>
 
-
-{% block content %}
-{% endblock %}
-
+  <div class="container-fluid px-3">
+    {% block content %}
+    {% endblock %}
+      </div>
 </body>
 </html>

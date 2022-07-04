@@ -1,0 +1,55 @@
+<section class="section-content padding-y">
+    <div class="card mx-auto" >
+        <article class="card-body">
+          
+          <header class="mb-4"><h4 class="card-title">Datos del pedido N° {{pedido.0}} con fecha {{orden.fecha_emision}}</h4></header>
+          <!--Form usuario normal-->
+         
+            <form action="{% url 'recepcion' %}" method="POST" class="was-validated">
+                {%csrf_token%}
+
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label>Folio</label>
+                        <input type="text" class="form-control" name="folio" id="folio" value="{{orden.folio_pedido}}" readonly="True">
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                        <label>Proveedor</label>
+                        <input type="text" class="form-control" name="rut" id="rut" value="({{pedido.2}}) {{pedido.3}}" readonly="True">
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                        <label>Cantidad pedida</label>
+                        <input type="text" class="form-control" name="cantidad" id="cantidad" value="{{pedido.4}}" readonly="True">
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                        <label>Sku</label>
+                        <input type="text" class="form-control" name="sku" id="sku" value="{{pedido.1}}" readonly="True">
+                    </div> <!-- form-group end.// -->
+                    
+                </div> <!-- form-row end.// -->
+                <div id="tablaDetalle">
+                    <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th>Nombre producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                          </tr>
+                        </thead>
+                        
+                        <tbody>
+                          <tr>
+                            <td>{{pedido.5}}</td>
+                            <td>${{pedido.6}}</td>
+                            <td>{{pedido.4}}</td>
+                          </tr>                         
+                        </tbody>
+                      </table>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Registrar productos</button>
+                </div> <!-- form-group// -->
+            </form>
+        </article>
+    </div>
+</section>

@@ -36,9 +36,8 @@ def register(request):
 
             pasw = make_password(password)
             #llamar al procedimiento almacenado
-            salida = agregar_cliente(run,first_name,last_name,phone_number,1,email,pasw,rut_emp,giro,razon)
-            
-            
+            agregar_cliente(run,first_name,last_name,phone_number,1,email,pasw,rut_emp,giro,razon)
+        
             #manda link de activacion de cuenta al correo
             current_site = get_current_site(request)
             mail_subject = 'por favor activa tu cuenta de SERVIEXPRESS'
@@ -90,6 +89,10 @@ def login(request):
                 elif user.role == 'client':
                     
                     return redirect('home')
+                
+                elif user.role == 'worker':
+
+                    return render(request, 'trabajadores/home.html')
                  
 
             

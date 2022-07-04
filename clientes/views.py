@@ -1,14 +1,17 @@
 from django.db import connection
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from administracion.views import mensajes
-from administracion.models import Cliente, Producto, Reserva, Vehiculo
+from administracion.models import Cliente, DetalleServicio, Producto, Reserva, Vehiculo
 from django.contrib.auth.decorators import login_required
 from .forms import ActualizarVehiculo, RegistroReserva, RegistroVehiculo
 import cx_Oracle
-from datetime import datetime
-import time
+import datetime
 from clientes.forms import RegistroVehiculo
 
+from django.template import Context
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 # Create your views here.
 def clientValid(request):
     if request.user.role == 'client':
@@ -74,7 +77,7 @@ def registroReserva(request):
         form = RegistroReserva(request.POST)
         if form.is_valid():
             cli = Cliente.objects.filter(usermail=request.user.email)
-            rut_cli = str(cli[0])
+            mail = request.user.email
             diaReserva = form.cleaned_data['fecha'].strftime('%Y-%m-%d')
             comentario = form.cleaned_data['comentario']
             horaReserva = request.POST.get('hora','')
@@ -90,9 +93,7 @@ def registroReserva(request):
             else:
                 diaReserva = form.cleaned_data['fecha'].strftime('%d-%m-%y')
                 fechaSave = diaReserva.replace('-','/') + ' ' + horaReserva
-                print(fechaSave)
-                print(rut_cli)
-                salida = add_reserva(fechaSave,rut_cli,comentario)
+                salida = add_reserva(fechaSave,mail,comentario)
                 mensajes(request,salida,'Su hora ha sido registrada exitosamente.')
                 return redirect('registro_reserva')
 
@@ -101,7 +102,7 @@ def registroReserva(request):
     }
     return render(request,'clientes/registro_reserva.html',data)
 
-def add_reserva(fecha,rut,comentarios):
+def  add_reserva(fecha,rut,comentarios):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
@@ -113,19 +114,12 @@ def listaReservas(request):
     if clientValid(request) == True:
         cli = Cliente.objects.filter(usermail=request.user.email)
         rut_cli = str(cli[0])
-        reservas = Reserva.objects.filter(cliente_rut_cli=rut_cli,estado=1)
+        reservas = Reserva.objects.filter(cliente_rut_cli=rut_cli,estado=0)
         data = {
             'reserva':reservas,
             'esCliente':True
         }
         return render(request,'clientes/reservas.html',data)
-    else:
-        reservas = Reserva.objects.filter(estado=1)
-        data = {
-            'reserva':reservas,
-            'esCliente':False
-        }
-        return render(request,'clientes/reservasWork.html',data)
 
 def RealizarPedido(request):
 
@@ -197,3 +191,54 @@ def eliminarVehiculo(request,patente):
     eliminar.activo = 0
     eliminar.save()
     return redirect('registro_vehiculo')
+
+def listaServicio(request):
+
+    data = {
+        'servicio': lista_servicios_realizados(request.user.email)
+    }
+    
+    return render(request, 'clientes/lista_servicio.html', data)
+
+def documento_servicio(request,detalle):
+    user = request.user
+    mail = request.user.email
+    try:
+        template = get_template('clientes/documento.html')
+        context = {
+            'factura':documento(detalle)
+        }
+        html = template.render(context)
+        response = HttpResponse(content_type='application/pdf')
+        #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+        pisaStatus = pisa.CreatePDF(
+            html, dest=response)
+
+        return response
+    except:
+        pass
+    return redirect('documento_servicio')
+
+def lista_servicios_realizados(mail):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc('SP_LISTA_SERVICIOS_REALIZADOS',[out_cur,mail])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+def documento(id_detalle):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc('SP_LISTA_DOCUMENTO',[out_cur, id_detalle])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
