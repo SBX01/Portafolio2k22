@@ -4,11 +4,17 @@
 
 Para poder comenzar a ejecutar el proyecto Necesita tener instalado python y el framework Django y una base de datos Oracle XE.
 
-Ejecutar los scripts SQL y DDL de creación de usuario y tablas.
+Ejecutar los scripts de creación de usuario con el usuario administrador de la base de datos (DBA).
 
-Ejecutar el script PROCEDIMIENTOS.SQL incluida en este proyecto.
+Ejecutar el script serviexpress.SQL incluida en este proyecto.
 
-Mediante la terminal vaya a la carpeta del proyecto y escriba el siguiente comando:
+Mediante la terminal vaya a la carpeta del proyecto y escriba los isguientes comandos:
+
+> pip install -r requirements.txt
+
+una vez terminado el proceso continue con el siguiente:
+
+> python manage.py makemigrations
 
 > python manage.py migrate
 
